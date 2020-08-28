@@ -1,0 +1,17 @@
+body{
+  color: black;
+  background-color: green;
+  text-align: center;
+}
+
+.left{
+float: left;
+padding-left: 50px;
+padding-right:50px;
+}
+
+.right{
+  float:right;
+  padding-left: 50px;
+  padding-right:50px;
+}
