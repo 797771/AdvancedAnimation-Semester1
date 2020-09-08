@@ -13,19 +13,23 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  animate();
+  for(var i=0;i<100;i++){
+      ball();
+  }
 }
 
 // Declare and initialize the ball variables
-var x, y, dx, dy, radius;
-x = Math.random()*window.innerWidth;
-y= Math.random()*window.innerHeight;
-dx = Math.random()*10 - 5;
-dy = Math.random()*10 - 5;
-radius = 30;
+  var x, y, dx, dy, radius;
+  x = Math.random()*window.innerWidth;
+  y= Math.random()*window.innerHeight;
+  dx = Math.random()*10 - 5;
+  dy = Math.random()*10 - 5;
+  radius = 30;
 
-function animate(){
+
+function ball(){
   ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.clearRect(x,y,x+dx, y+dy);
   ctx.strokeStyle = 'rgba(155,180,50)';
   ctx.fillStyle = 'rgba(155,180, 50)';
   ctx.beginPath();
@@ -36,5 +40,5 @@ function animate(){
   y += dy;
   if(x > canvas.width || x < 0)  dx = -dx;
   if(y > canvas.height || y < 0)  dy = -dy;
-  requestAnimationFrame(animate);
+  requestAnimationFrame(ball);
 }
