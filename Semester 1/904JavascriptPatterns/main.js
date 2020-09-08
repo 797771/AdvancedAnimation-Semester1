@@ -28,8 +28,8 @@ function init(){
 
 
 function ball(){
-  ctx.clearRect(0,0,canvas.width, canvas.height);
   ctx.clearRect(x,y,x+dx, y+dy);
+  ctx.clearRect(0,0,canvas.width, canvas.height);
   ctx.strokeStyle = 'rgba(155,180,50)';
   ctx.fillStyle = 'rgba(155,180, 50)';
   ctx.beginPath();
