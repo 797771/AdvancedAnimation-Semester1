@@ -1,6 +1,7 @@
 var canvas;
 var ctx;
 var ball;
+//var balls[];
 //  intialize the Canvas and context
 window.onload = init;
 
@@ -14,7 +15,7 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  ball=new Ball(400, 300);
+  ball=new Ball(400,300);
   animate();
 }
 
@@ -48,3 +49,9 @@ function Ball(x, y){
     ctx.stroke();
   }
 }
+
+/*function loadBalls(num){
+  for(var i=0; i<num; i++){
+    balls[i]=new Ball(Math.random()*window.innerWidth, Math.random()*window.innerHeight);
+  }
+}*/
