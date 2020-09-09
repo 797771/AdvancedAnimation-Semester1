@@ -1,5 +1,6 @@
 var canvas;
 var ctx;
+var ball;
 //  intialize the Canvas and context
 window.onload = init;
 
@@ -13,32 +14,37 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  for(var i=0;i<100;i++){
-      ball();
-  }
+  ball=new Ball(400, 300);
+  animate();
 }
 
-// Declare and initialize the ball variables
-  var x, y, dx, dy, radius;
-  x = Math.random()*window.innerWidth;
-  y= Math.random()*window.innerHeight;
-  dx = Math.random()*10 - 5;
-  dy = Math.random()*10 - 5;
-  radius = 30;
+function animate(){
+  ball.update();
+  requestAnimationFrame(animate);
+}
 
+function Ball(x, y){
+  this.x = x;
+  this.y = y;
+  this.dx = Math.random()*10 - 5;
+  this.dy = Math.random()*10 - 5;
+  this.radius = 30;
 
-function ball(){
-  ctx.clearRect(x,y,x+dx, y+dy);
-  ctx.clearRect(0,0,canvas.width, canvas.height);
-  ctx.strokeStyle = 'rgba(155,180,50)';
-  ctx.fillStyle = 'rgba(155,180, 50)';
-  ctx.beginPath();
-  ctx.arc(x,y,radius,Math.PI*2, 0, false);
-  ctx.fill();
-  ctx.stroke();
-  x += dx;
-  y += dy;
-  if(x > canvas.width || x < 0)  dx = -dx;
-  if(y > canvas.height || y < 0)  dy = -dy;
-  requestAnimationFrame(ball);
+  this.update=function(){
+    this.x += this.dx;
+    this.y += this.dy;
+    if(this.x > canvas.width || this.x < 0)  this.dx = -this.dx;
+    if(this.y > canvas.height || this.y < 0)  this.dy = -this.dy;
+    this.render();
+  }
+
+  this.render=function(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(155,180,50)';
+    ctx.fillStyle = 'rgba(155,180, 50)';
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.radius,Math.PI*2, 0, false);
+    ctx.fill();
+    ctx.stroke();
+  }
 }
