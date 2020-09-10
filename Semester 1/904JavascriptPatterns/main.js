@@ -1,7 +1,6 @@
 var canvas;
 var ctx;
-var ball;
-//var balls[];
+var balls=new Array();
 //  intialize the Canvas and context
 window.onload = init;
 
@@ -15,12 +14,15 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  ball=new Ball(400,300);
+  loadBalls(100);
   animate();
 }
 
 function animate(){
-  ball.update();
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  for(var i=0; i<balls.length;i++){
+    balls[i].update();
+  }
   requestAnimationFrame(animate);
 }
 
@@ -40,7 +42,6 @@ function Ball(x, y){
   }
 
   this.render=function(){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
     ctx.strokeStyle = 'rgba(155,180,50)';
     ctx.fillStyle = 'rgba(155,180, 50)';
     ctx.beginPath();
@@ -50,8 +51,8 @@ function Ball(x, y){
   }
 }
 
-/*function loadBalls(num){
+function loadBalls(num){
   for(var i=0; i<num; i++){
     balls[i]=new Ball(Math.random()*window.innerWidth, Math.random()*window.innerHeight);
   }
-}*/
+}
