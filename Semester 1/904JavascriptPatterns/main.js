@@ -22,6 +22,7 @@ function animate(){
   ctx.clearRect(0,0,canvas.width, canvas.height);
   for(var i=0; i<balls.length;i++){
     balls[i].update();
+    balls[i].render();
   }
   requestAnimationFrame(animate);
 }
@@ -31,17 +32,17 @@ function Ball(x, y){
   this.y = y;
   this.dx = Math.random()*10 - 5;
   this.dy = Math.random()*10 - 5;
-  this.radius = 30;
+  this.radius = 10;
+}
 
-  this.update=function(){
+  Ball.prototype.update=function(){
     this.x += this.dx;
     this.y += this.dy;
     if(this.x > canvas.width || this.x < 0)  this.dx = -this.dx;
     if(this.y > canvas.height || this.y < 0)  this.dy = -this.dy;
-    this.render();
   }
 
-  this.render=function(){
+  Ball.prototype.render=function(){
     ctx.strokeStyle = 'rgba(155,180,50)';
     ctx.fillStyle = 'rgba(155,180, 50)';
     ctx.beginPath();
@@ -49,7 +50,7 @@ function Ball(x, y){
     ctx.fill();
     ctx.stroke();
   }
-}
+
 
 function loadBalls(num){
   for(var i=0; i<num; i++){
