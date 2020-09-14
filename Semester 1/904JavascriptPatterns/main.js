@@ -11,7 +11,7 @@ function init(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   canvas.style.border = 'solid black 2px';
-  canvas.style.backgroundColor = 'rgba(0,24,35)';
+  canvas.style.backgroundColor = 'rgba(0, 24, 25)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
   loadBalls(100);
