@@ -1,18 +1,22 @@
+window.onload=init;
 var canvas;
 var ctx;
-
-window.onload = init;
+var game;
 
 function init(){
-  canvas = document.getElementById('cnv');
-  canvas.width = window.innerWidth-25;
-  canvas.height = window.innerHeight-30;
-  canvas.style.border = 'solid black 5px';
-  ctx = wrapperDiv.getContext('2d');
+  canvas=document.createElement("canvas");
+  canvas.width = 800;
+  canvas.height = 600;
+  ctx=canvas.getContext('2d');
+  game=new Game();
+  animate();
+}
 
-  const wrapperDiv=document.createElement("div");
-  const buttonMenuDiv=document.createElement("div");
-  const buttonDiv=document.createElement("div");
-  buttonMenuDiv.appendChild(buttonDiv);
-  wrapperDiv.appendChild(buttonMenuDiv);
+function Game(){
+  this.ga=new GameArea();
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+
 }
