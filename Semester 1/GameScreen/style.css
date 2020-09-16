@@ -2,13 +2,14 @@ body{
    background-color: #013135;
    margin:0;
  }
-#wrapperDiv{  id wrapperDiv
+#wrapperDiv{  // id wrapperDiv
  height: 800px;
  width: 900px;
+ background-color: yellow;
  margin:auto;
  margin-top: 20px;
 }
-.tile{   // class tile
+#tileDiv{   // id tileDiv
   float:left;
   padding:20px;
   width:45px;

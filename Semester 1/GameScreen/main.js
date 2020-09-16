@@ -1,14 +1,16 @@
-window.onload=init;
 var canvas;
 var ctx;
 var game;
 
+window.onload=init;
+
 function init(){
   canvas=document.createElement("canvas");
   canvas.width = 800;
-  canvas.height = 600;
+  canvas.height = 900;
   ctx=canvas.getContext('2d');
   game=new Game();
+
   animate();
 }
 
@@ -18,5 +20,4 @@ function Game(){
 
 function animate(){
   requestAnimationFrame(animate);
-
 }
