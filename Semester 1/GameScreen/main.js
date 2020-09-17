@@ -6,8 +6,8 @@ window.onload=init;
 
 function init(){
   canvas=document.createElement("canvas");
-  canvas.width = 800;
-  canvas.height = 900;
+  canvas.width = 900;
+  canvas.height = 800;
   ctx=canvas.getContext('2d');
   game=new Game();
 
