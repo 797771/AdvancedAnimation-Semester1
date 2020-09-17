@@ -2,18 +2,26 @@ body{
    background-color: black;
    margin:0;
  }
+
+#canvas2{
+  background-color: purple;
+  height: 500px;
+  width: 800px;
+  position:relative;
+  bottom:505px;
+}
+
 #wrapperDiv{
- background-color: purple;
  height: 600px;
  width: 900px;
  margin:auto;
  margin-top: 20px;
 }
 
+
 #tileMenuDiv{
   float:right;
   position: relative;
-  top: 100px;
   background-color: blue;
   width: 100px;
   height:500px;
@@ -23,6 +31,6 @@ body{
   float:left;
   position: relative;
   background-color: blue;
-  width: 800px;
+  width: 900px;
   height:100px;
 }
