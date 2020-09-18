@@ -5,10 +5,6 @@ var game;
 window.onload=init;
 
 function init(){
-  canvas=document.createElement("canvas");
-  canvas.width = 900;
-  canvas.height = 600;
-  ctx=canvas.getContext('2d');
   game=new Game();
 
   animate();

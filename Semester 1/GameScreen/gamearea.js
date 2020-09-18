@@ -1,6 +1,5 @@
 var tiles=[];
 var buttons=[];
-var canvas2;
 
 function GameArea(){
   //Wrapper Div
@@ -28,7 +27,7 @@ function GameArea(){
     buttons[i].setAttribute("style", "padding:20px;width:55px;height:45px;margin-right:100px;margin-top: 50px;border-radius:100%;background-color: white;border: solid black 2px;float:left;position:relative;bottom:510px;left:60px;");
   }
 
-  //html canvas inside wrapperDiv
-  canvas2=document.getElementById('canvas2');
+  // create html canvas inside wrapperDiv
+  canvas2=document.createElement("canvas");
   this.wrapperDiv.appendChild(canvas2);
 }
