@@ -1,6 +1,7 @@
 var tiles=[];
 var buttons=[];
 
+
 function GameArea(){
   //Wrapper Div
   this.wrapperDiv=document.getElementById("wrapperDiv");
@@ -20,6 +21,7 @@ function GameArea(){
   this.buttonMenuDiv = document.createElement("div");
   this.wrapperDiv.appendChild(this.buttonMenuDiv);
 
+
   //create 4 button divs
   for(var i=0; i<4; i++){
     buttons[i]=this.buttonDiv=document.createElement("div");
@@ -30,4 +32,6 @@ function GameArea(){
   // create html canvas inside wrapperDiv
   canvas2=document.createElement("canvas");
   this.wrapperDiv.appendChild(canvas2);
+  canvas2.setAttribute("style", "background-color: purple;height: 500px;width: 800px;position: relative;bottom:505px;");
+
 }
