@@ -1,5 +1,5 @@
 body{
-   background-color: black;
+   background-color: lightblue;
    margin:0;
  }
 
@@ -13,14 +13,17 @@ body{
 #tileMenuDiv{
 float:right;
 position: relative;
+top:95px;
 background-color: blue;
 width: 100px;
 height:500px;
 }
 
+
 #buttonMenuDiv{
   float:left;
   position: relative;
+  bottom:500px;
   background-color: blue;
   width: 900px;
   height:100px;
