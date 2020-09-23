@@ -31,8 +31,8 @@ function GameArea(){
   }
 
   // create html canvas inside wrapperDiv
-  canvas2=document.createElement("canvas");
-  this.wrapperDiv.appendChild(canvas2);
-  canvas2.setAttribute("style", "background-color: black;height: 500px;width: 800px;position: relative;bottom:505px;");
+  canvas=document.getElementById("canvas");
+  this.wrapperDiv.appendChild(canvas);
+  canvas.setAttribute("style", "background-color: black;height: 500px;width: 800px;position: relative;bottom:505px;");
 
 }
