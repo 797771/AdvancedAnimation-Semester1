@@ -11,7 +11,7 @@ function init(){
   canvas=document.getElementById("canvas");
   ctx=canvas.getContext('2d');
 
-  loadBalls(100);
+  loadBalls(50);
   animate();
 }
 
@@ -25,6 +25,7 @@ function animate(){
   for(var i=0; i<balls.length;i++){
     balls[i].update();
     balls[i].render();
+
   }
   requestAnimationFrame(animate);
 }
