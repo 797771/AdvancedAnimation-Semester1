@@ -79,7 +79,7 @@ Bubble.prototype.checkEdges = function(){
 
 
 
-//  Bubble constructor function +++++++++++++++++++++++++++++
+//  bubble code without location and velocity
 /*function Bubble(x, y, dx, dy, rad, clr){
     this.x = x;
     this.y = y;
