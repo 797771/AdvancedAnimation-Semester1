@@ -1,12 +1,12 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
-function Bubble(rad, clr){
-    PVector location;
-    PVector velocity;
-    this.rad = rad;
-    this.clr = clr;
-    this.isOverlapping = false;
-}
 
+function Bubble(x, y, dx, dy, rad, clr){
+  location = new PVector(x, y);
+  velocity = new PVector(dx, dy);
+  this.rad = rad;
+  this.clr = clr;
+  this.isOverlapping = false;
+}
   //  placing methods in the prototype (every bubble shares functions)
 Bubble.prototype.run = function(){
     this.checkEdges();
@@ -55,8 +55,6 @@ Bubble.prototype.render = function(){
 // Move the bubble in a random direction
 Bubble.prototype.update = function(){
     if(!game.gamePaused){
-      location = new PVector(Math.random(canvas.width), Math.random(canvas.height));
-      velocity= new PVector(Math.random()*6-3, Math.random()*6-3)
       location.add(velocity);
     }
   }
