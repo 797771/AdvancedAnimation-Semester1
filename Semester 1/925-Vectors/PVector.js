@@ -1,9 +1,9 @@
-function PVector(px, py){
-  this.x = px;
-  this.y = py;
+function PVector(x1, y1){
+  this.x = x1;
+  this.y = y1;
 }
 
-PVector.prototype.add(PVector v) {
-  this.y = this.y + v.y;
-  this.x = this.x + v.x;
+PVector.prototype.add(v3){
+  this.y = this.y + v3.y;
+  this.x = this.x + v3.x;
 }
