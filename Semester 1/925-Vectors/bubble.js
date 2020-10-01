@@ -1,8 +1,8 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
 
-function Bubble(x, y, dx, dy, rad, clr){
-  location = new PVector(x, y);
-  velocity = new PVector(dx, dy);
+function Bubble(rad, clr){
+  var location = new JSVector(Math.random()*canvas.width, Math.random()*canvas.height);
+  var velocity;
   this.rad = rad;
   this.clr = clr;
   this.isOverlapping = false;
@@ -55,6 +55,7 @@ Bubble.prototype.render = function(){
 // Move the bubble in a random direction
 Bubble.prototype.update = function(){
     if(!game.gamePaused){
+      velocity = new JSVector(Math.random()*6-3, Math.random()*6-3);
       location.add(velocity);
     }
   }
