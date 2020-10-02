@@ -1,8 +1,9 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
 
-function Bubble(rad, clr){
-  this.location = new JSVector(Math.random()*canvas.width, Math.random()*canvas.height);
-  var velocity;
+function Bubble(x, y, dx, dy, rad, clr){
+  this.location = new JSVector(x, y);
+  this.velocity = new JSVector(dx, dy);
+
   this.rad = rad;
   this.clr = clr;
   this.isOverlapping = false;
@@ -22,7 +23,7 @@ Bubble.prototype.checkOverlapping = function(){
     let b = game.bubbles;
     for(let i = 0; i < b.length; i++){ // for all the bubbles
        if(this !== b[i]){   // if not this bubble
-         let d = Math.sqrt((this.location.x-b[i].x)*(this.location.x-b[i].x) + (this.location.y-b[i].y)*(this.location.y-b[i].y));
+         var d = this.location.distance(b[i].location);
          if(d < this.rad + b[i].rad){
             this.isOverlapping = true;
             this.clr =  "rgba(100,220,55,10)";
@@ -55,8 +56,9 @@ Bubble.prototype.render = function(){
 // Move the bubble in a random direction
 Bubble.prototype.update = function(){
     if(!game.gamePaused){
-      velocity = new JSVector(Math.random()*6-3, Math.random()*6-3);
-      this.location.add(velocity);
+      this.velocity.dx = Math.random()*6-3;
+      this.velocity.dy = Math.random()*6-3;
+      this.location.add(this.velocity);
     }
   }
 
