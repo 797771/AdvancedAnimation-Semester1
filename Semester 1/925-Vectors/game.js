@@ -14,10 +14,6 @@ function Game(){
     let numBubbles = 150;
     for(var i = 0; i < numBubbles; i++){
         var x, y, dx, dy, diam, clr, r, g, b;
-        //x = Math.random()*this.canvas.width;
-        //y = Math.random()*this.canvas.height;
-        //dx = Math.random()*6-3;
-        //dy = Math.random()*6-3;
         diam = 15;//Math.random()*20 + 10;
         r = 255;
         g = 255;
