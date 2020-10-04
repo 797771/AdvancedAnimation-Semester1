@@ -36,10 +36,17 @@ Bubble.prototype.run = function(){
 // draw the bubble on the canvas
 Bubble.prototype.render = function(){
     let ctx = game.ctx;
+    let b = game.bubbles;
     // color depends on whether this bubble overlaps any oher bubble
     //if(this.isOverlapping){
-        ctx.strokeStyle = "rgba(255,255,255,255)";//this.clr;
-        ctx.fillStyle = this.clr;
+        if(this == b[0]){
+          ctx.strokeStyle = "rgba(154, 18, 179, 1)";
+          ctx.fillStyle = "rgba(154, 18, 179, 1)";
+        }
+        else{
+          ctx.strokeStyle = "rgba(255,255,255,255)";//this.clr;
+          ctx.fillStyle = this.clr;
+        }
         ctx.beginPath();
         ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
         ctx.stroke();
@@ -58,19 +65,18 @@ Bubble.prototype.update = function(){
   let b=game.bubbles;
   if(this !== b[0]){
       let d = this.location.distance(b[0].location);
-      if(d<300){
+      if(d<500){
         this.acceleration = JSVector.subGetNew(this.location, b[0].location);
         this.acceleration.normalize();
         this.acceleration.multiply(0.05);
       }
   }
-    //if(!game.gamePaused){
-      this.velocity.x = Math.random()*6-3;
-      this.velocity.y = Math.random()*6-3;
+    if(!game.gamePaused){
+      this.velocity.x = Math.random()*10-5;
+      this.velocity.y = Math.random()*10-5;
       this.location.add(this.velocity);
       this.velocity.add(this.acceleration);
-
-    //}
+    }
 }
 
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
