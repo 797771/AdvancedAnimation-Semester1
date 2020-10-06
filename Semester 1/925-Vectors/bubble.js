@@ -65,7 +65,7 @@ Bubble.prototype.update = function(){
   let b=game.bubbles;
   if(this !== b[0]){
       let d = this.location.distance(b[0].location);
-      if(d<500){
+      if(d<1000){
         this.acceleration = JSVector.subGetNew(this.location, b[0].location);
         this.acceleration.normalize();
         this.acceleration.multiply(0.05);
