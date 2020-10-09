@@ -94,20 +94,28 @@ JSVector.prototype.distanceSquared = function(v2){
 //                           |  sin   +cos  |
 
 JSVector.prototype.rotate = function(angle) {
-  
+  let x = this.x, y = this.y;
+  let cos = Math.cos(angle);
+  let sin = Math.sin(angle);
+  this.x = x*cos - y*sin;
+  this.y = x*sin + y*cos;
 }
 
 // Get the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
-
+  return(Math.abs(this.getDirection()-v2.getDirection()));
 }
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-
+  return(new JSVector(this.x, this.y));
 }
 
 // Override inherited toString() to describe this instance
 JSVector.prototype.toString = function() {
-
+  let x = this.x.toFixed(2);
+  let y = this.y.toFixed(2);
+  let mag = this.getMagnitude().toFixed(2);
+  let dir = this.getDirection().toFixed(2);
+  return("x: " + x + "y: " + y + "mag: " + mag + "dir: " + dir);
 }
