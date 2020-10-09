@@ -14,8 +14,8 @@ function Game(){
     let numMovers = 100;
     for(var i = 0; i < numMovers; i++){
         var x, y, dx, dy, diam, clr, r, g, b;
-        x = Math.random()*this.canvas.width;
-        y = Math.random()*this.canvas.height;
+        x = this.canvas.width/2;
+        y = this.canvas.height/2;
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         diam = 10;//Math.random()*20 + 10;

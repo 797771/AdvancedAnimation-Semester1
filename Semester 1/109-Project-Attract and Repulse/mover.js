@@ -3,8 +3,7 @@
 function Mover(x, y, dx, dy, rad, clr){
   this.location = new JSVector(x, y);
   this.velocity = new JSVector(dx, dy);
-  this.attract = new JSVector(0, 0);
-  this.repulse = new JSVector(0, 0);
+  this.pulser= new JSVector(0, 0);
   this.rad = rad;
   this.clr = clr;
   this.isOverlapping = false;
@@ -26,10 +25,6 @@ Mover.prototype.render = function(){
           ctx.strokeStyle = "rgba(154, 18, 179, 1)";
           ctx.fillStyle = "rgba(154, 18, 179, 1)";
         }
-        else if(this == b[1]){
-          ctx.strokeStyle = "rgba(0, 181, 204, 1)";
-          ctx.fillStyle = "rgba(0, 181, 204, 1)";
-        }
         else{
           ctx.strokeStyle = "rgba(255,255,255,255)";//this.clr;
           ctx.fillStyle = this.clr;
@@ -46,25 +41,23 @@ Mover.prototype.update = function(){
   let b=game.movers;
   if(this !== b[0]){
       let d = this.location.distance(b[0].location);
-      if(d<200){
-        this.repulse = JSVector.subGetNew(this.location, b[0].location);
-        this.repulse.normalize();
-        this.repulse.multiply(0.05);
+      if(d<300){
+        this.pulser = JSVector.subGetNew(this.location, b[0].location);
+        this.pulser.normalize();
+        this.pulser.multiply(0.05);
+      }
+      if(d>300){
+        this.pulser = JSVector.subGetNew(b[0].location, this.location);
+        this.pulser.normalize();
+        this.pulser.multiply(0.05);
       }
     }
-    if(this !== b[1]){
-        let d = this.location.distance(b[1].location);
-        if(d<200){
-          this.attract = JSVector.subGetNew(b[1].location, this.location);
-          this.attract.normalize();
-          this.attract.multiply(0.05);
-        }
-      }
     if(!game.gamePaused){
-        this.velocity.add(this.attract);
-        this.velocity.add(this.repulse);
+      if(this !== b[0]){
+        this.velocity.add(this.pulser);
         this.velocity.limit(3);
         this.location.add(this.velocity);
+      }
     }
 }
 
