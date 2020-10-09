@@ -41,17 +41,18 @@ Mover.prototype.update = function(){
   let b=game.movers;
   if(this !== b[0]){
       let d = this.location.distance(b[0].location);
-      if(d<300){
-        this.pulser = JSVector.subGetNew(this.location, b[0].location);
-        this.pulser.normalize();
-        this.pulser.multiply(0.05);
+      if(d<200){
+          this.pulser = JSVector.subGetNew(this.location, b[0].location);
+          this.pulser.normalize();
+          this.pulser.multiply(0.05);
       }
-      if(d>300){
+
+    if(d>200){
         this.pulser = JSVector.subGetNew(b[0].location, this.location);
         this.pulser.normalize();
         this.pulser.multiply(0.05);
-      }
     }
+  }
     if(!game.gamePaused){
       if(this !== b[0]){
         this.velocity.add(this.pulser);
