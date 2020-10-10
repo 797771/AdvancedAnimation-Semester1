@@ -27,7 +27,7 @@ function Game(){
     }
 
     //  Add event handlers to all tile objects
-    for(let i = 0; i < this.ga.tiles.length; i++){
+    /*for(let i = 0; i < this.ga.tiles.length; i++){
         this.ga.tiles[i].addEventListener('mouseover', // mouseover is the name of an event
                                         function(){//  JavaScript has anonymous functions
                                           //  'this' is the listener target object: tile
@@ -42,7 +42,7 @@ function Game(){
             game.gamePaused = !game.gamePaused;
             console.log("Mouse Clicked");
           },false);
-    }
+    }*/
 
 }//++++++++++++++++++++++  end Bubbles constructor
 
