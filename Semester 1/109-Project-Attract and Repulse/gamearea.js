@@ -10,7 +10,6 @@ function GameArea(){
     let tileMenuDiv = document.createElement("div");
     wrapperDiv.appendChild(tileMenuDiv) // tileMenuDiv is child of wrapperDiv
     tileMenuDiv.setAttribute("style", " background-color:#033c4a; width:1100px; height:100px;float:left;");
-
     // create canvasDiv
     let canvasDiv = document.createElement("div");
     wrapperDiv.appendChild(canvasDiv);  // canvasDiv is child of wrapperDiv

@@ -55,7 +55,6 @@ Mover.prototype.update = function(){
         this.pulser = JSVector.subGetNew(b[0].location, this.location);
         this.pulser.normalize();
         this.pulser.multiply(0.05);
-
     }
   }
     if(!game.gamePaused){
