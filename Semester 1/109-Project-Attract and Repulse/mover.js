@@ -36,7 +36,17 @@ Mover.prototype.render = function(){
         ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
         ctx.stroke();
         ctx.fill();
-
+        // ctx.save();
+        // ctx.beginPath();
+        // ctx.translate(this.location.x, this.location.y);
+        // ctx.rotate(this.velocity.getDirection());
+        // ctx.moveTo(20, 0);
+        // ctx.lineTo(-20, -10);
+        // ctx.lineTo(-20, 10);
+        // ctx.closePath();
+        // ctx.stroke();
+        // ctx.fill();
+        // ctx.restore();
   }
 
 // Move the mover in a random direction
