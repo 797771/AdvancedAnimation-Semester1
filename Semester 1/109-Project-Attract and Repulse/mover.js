@@ -1,4 +1,5 @@
 //  Mover constructor function +++++++++++++++++++++++++++++
+var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
 
 function Mover(x, y, dx, dy, rad, clr){
   this.location = new JSVector(x, y);
@@ -20,17 +21,16 @@ Mover.prototype.run = function(){
 Mover.prototype.render = function(){
     let ctx = game.ctx;
     let b = game.movers;
-    var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
 
         if(this == b[0]){
           ctx.strokeStyle = "rgba(0, 0, 0, 0)";
           ctx.fillStyle = "rgba(0, 0, 0, 0)";
         }
         else{
-          //ctx.strokeStyle = randomColor;//this.clr;
-          //ctx.fillStyle = randomColor;
-          ctx.strokeStyle = "rgba(255, 255, 255, 255)";
-          ctx.fillStyle = this.clr;
+          ctx.strokeStyle = randomColor;//this.clr;
+          ctx.fillStyle = randomColor;
+          //ctx.strokeStyle = "rgba(255, 255, 255, 255)";
+          //ctx.fillStyle = this.clr;
         }
         ctx.beginPath();
         ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
