@@ -37,7 +37,6 @@ Star.prototype.render = function(){
 
 // Move the mover in a random direction
 Star.prototype.update = function(){
-  let b=game.stars;
     if(!game.gamePaused){
         this.location.add(this.velocity);
     }

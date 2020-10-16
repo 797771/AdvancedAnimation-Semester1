@@ -26,7 +26,7 @@ function Game(){
     }
 
     this.hearts = [];
-    let numHearts = 10;
+    let numHearts = 4;
     for(var i = 0; i < numHearts; i++){
         var x, y, dx, dy, clr, r, g, b;
         x = Math.random()*this.canvas.width;
@@ -49,7 +49,7 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.stars.length; i++){
       this.stars[i].run();
     }
-    for(let i = 0; i < this.hearts.length; i++){
+     for(let i = 0; i < this.hearts.length; i++){
      this.hearts[i].run();
     }
   }
