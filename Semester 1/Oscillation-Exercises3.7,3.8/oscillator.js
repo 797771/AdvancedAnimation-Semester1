@@ -1,9 +1,10 @@
 
 function Oscillator(){
-    this.angle = new JSVector(90, 0);
-    this.avelocity = new JSVector(Math.random()*0.05, Math.random()*0.05);
+    this.angle = new JSVector(0, 0);
+    this.velocity = new JSVector(Math.random()*0.05, Math.random()*0.05);
+    //this.acceleration = new JSVector(0.01, 0.01);
     this.amplitude = new JSVector(Math.random()*canvas.width/2, Math.random()*canvas.height/2);
-    // this.avelocity = new JSVector(0.07, 0.07);
+    // this.velocity = new JSVector(0.07, 0.07);
     // this.amplitude = new JSVector(70,50);
   }
 
@@ -13,7 +14,8 @@ function Oscillator(){
     }
 
   Oscillator.prototype.oscillate = function(){
-    this.angle.add(this.avelocity);
+    this.angle.add(this.velocity);
+    //this.velocity.add(this.acceleration);
   }
 
  Oscillator.prototype.display = function(){
