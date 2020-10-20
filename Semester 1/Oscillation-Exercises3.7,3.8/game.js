@@ -7,7 +7,7 @@ function Game(){
 
     //   create the array of bubble objects
     this.balls = [];
-    let numBalls = 1;
+    let numBalls = 10;
     for(var i = 0; i < numBalls; i++){
         this.balls.push(new Oscillator());
     }
