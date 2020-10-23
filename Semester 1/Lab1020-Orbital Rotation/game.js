@@ -28,6 +28,7 @@ Game.prototype.run = function(){
         g = Math.random()*155;
         b = Math.random()*155;
         clr = "rgba(" + r + ", "+ g + ","+ b +")"
+        numOrbs = Math.random()*10;
         this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
       }
     }

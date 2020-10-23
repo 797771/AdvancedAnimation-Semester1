@@ -8,16 +8,26 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.orbiters = [];
 
   //create all orbiters
-  // for(var i = 0; i<numOrbs, i++){
-  //
-  // }
+   for(let i = 0; i<numOrbs, i++){
+     let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
+     let angleVel = numOrbs*0.01;
+     this.orbiters.push(new Orbiter(this, 4, 25, a, angleVel, this.clr));
+   }
 }
 
 Mover.prototype.run = function(){
     this.checkEdges();
     this.update();
     this.render();
-  }
+
+    //update and render orbiters
+    for(var i=0; i<this.orbiters.length;i++){
+      let orb = this.orbiters[i];
+      orb.update();
+      orb.render();
+    }
+
+}
 
 
 // draw the bubble on the canvas
@@ -59,18 +69,3 @@ Mover.prototype.checkEdges = function(){
     }
 
   }
-
-//
-//
-// function Orbiter(){
-//
-// }
-//
-// Orbiter.prototype.update = function(){
-//
-// }
-//
-//
-// Orbiter.prototype.render = function(){
-//
-// }
