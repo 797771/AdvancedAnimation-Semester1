@@ -8,7 +8,7 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.orbiters = [];
 
   //create all orbiters
-   for(let i = 0; i<numOrbs, i++){
+   for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
      let angleVel = numOrbs*0.01;
      this.orbiters.push(new Orbiter(this, 4, 25, a, angleVel, this.clr));

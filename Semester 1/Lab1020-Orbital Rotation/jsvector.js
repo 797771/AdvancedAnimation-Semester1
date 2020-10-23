@@ -23,7 +23,7 @@ JSVector.prototype.getMagnitude = function(){
 // Set the angle (direction) of the vector,
 // retaining the magnitude.
 JSVector.prototype.setDirection = function(angle){
-  var mag = getMagnitude();
+  var mag = this.getMagnitude();
   this.x = Math.cos(angle) * mag;
   this.y = Math.sin(angle) * mag;
 }
