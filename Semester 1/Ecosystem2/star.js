@@ -2,6 +2,7 @@
 function Star(x, y, dx, dy, clr){
   this.location = new JSVector(x, y);
   this.velocity = new JSVector(dx, dy);
+  this.attract = new JSVector(0,0);
   this.clr = clr;
   this.isOverlapping = false;
 }
@@ -37,9 +38,24 @@ Star.prototype.render = function(){
 
 // Move the mover in a random direction
 Star.prototype.update = function(){
-    if(!game.gamePaused){
-        this.location.add(this.velocity);
+  let h = game.hearts;
+  let b = game.stars;
+  for(let i = 0; i<b.length;i++){
+    for(let j = 0; j<h.length;j++){
+      let d = b[i].location.distance(h[j].location);
+      if(d<100){
+        this.attract = JSVector.subGetNew(h[j].location, b[i].location);
+        this.attract.normalize();
+        this.attract.multiply(0.05);
+      }
     }
+  }
+
+  if(!game.gamePaused){
+    this.velocity.add(this.attract);
+    this.velocity.limit(3);
+    this.location.add(this.velocity);
+  }
 }
 
 // When a mover hits an edge of the canvas, it wraps around to the opposite edge.
