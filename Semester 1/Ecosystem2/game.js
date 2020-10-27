@@ -49,11 +49,11 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
+    for(let i = 0; i < this.hearts.length; i++){
+    this.hearts[i].run();
+   }
     for(let i = 0; i < this.stars.length; i++){
       this.stars[i].run();
-    }
-     for(let i = 0; i < this.hearts.length; i++){
-     this.hearts[i].run();
     }
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();

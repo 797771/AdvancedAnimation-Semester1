@@ -15,24 +15,30 @@ Heart.prototype.run = function(){
 // draw the mover on the canvas
 Heart.prototype.render = function(){
     let ctx = game.ctx;
-
-        ctx.strokeStyle = "rgba(240, 52, 52, 1)";
-        ctx.fillStyle = "rgba(240, 52, 52, 1)";
+        //ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.strokeStyle = "rgba(189, 195, 199, 1)";
+        ctx.fillStyle = "rgba(189, 195, 199, 1)";
 
         ctx.save();
         ctx.translate(this.location.x, this.location.y);
 
 
         ctx.beginPath();
-            ctx.moveTo(75, 40);
-            ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
-            ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
-            ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
-            ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
-            ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
-            ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+        ctx.moveTo(75, 40);
+        ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+        ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+        ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+        ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+        ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+        ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
         ctx.fill();
         ctx.restore();
+
+
+        // ctx.beginPath();
+        // ctx.arc(this.location.x, this.location.y, 30, Math.PI*2, 0, false);
+        // ctx.fill();
+        // ctx.restore();
   }
 
 // Move the mover in a random direction
