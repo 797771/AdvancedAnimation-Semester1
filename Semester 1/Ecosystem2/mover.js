@@ -6,12 +6,13 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.orbitAngle = Math.random()*Math.PI;
   this.clr = clr;
   this.orbiters = [];
+  this.orbitclr = "rgba(102, 255, 0, 1)"
 
   //create all orbiters
    for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
      let angleVel = numOrbs*0.01;
-     this.orbiters.push(new Orbiter(this, 4, 25, a, angleVel, this.clr));
+     this.orbiters.push(new Orbiter(this, 1, 100, a, angleVel, this.orbitclr));
    }
 }
 

@@ -10,7 +10,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.movers = [];
-    this.createMovers(this.canvas, 10);
+    this.createMovers(this.canvas, 1);
 
     //   create the array of bubble objects
     this.stars = [];
@@ -63,17 +63,14 @@ Game.prototype.run = function(){
 
 Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
-    var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
-    radius = 7;
+    var x, y, dx, dy, radius, clr, numOrbs;
+    radius = 30;
     x = Math.random()*this.canvas.width;
     y = Math.random()*this.canvas.height;
     dx = Math.random()*2-1;
     dy = Math.random()*2-1;
-    r = Math.random()*200+55;
-    g = Math.random()*155;
-    b = Math.random()*155;
-    clr = "rgba(" + r + ", "+ g + ","+ b +")"
-    numOrbs = Math.floor(Math.random() * 10) + 3;
+    clr = "rgba(8, 146, 208, 1)"
+    numOrbs = 40;
     this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
   }
 }

@@ -2,6 +2,7 @@
 function Heart(x, y, dx, dy, clr){
   this.location = new JSVector(x, y);
   this.velocity = new JSVector(dx, dy);
+  this.acceleration = new JSVector(0, 0);
   this.clr = clr;
   this.isOverlapping = false;
 }
@@ -15,28 +16,31 @@ Heart.prototype.run = function(){
 // draw the mover on the canvas
 Heart.prototype.render = function(){
     let ctx = game.ctx;
-        //ctx.clearRect(0,0,canvas.width, canvas.height);
-        ctx.strokeStyle = "rgba(189, 195, 199, 1)";
-        ctx.fillStyle = "rgba(189, 195, 199, 1)";
-
         ctx.save();
         ctx.translate(this.location.x, this.location.y);
 
 
+        ctx.strokeStyle = "rgba(189, 195, 199, 1)";
+        ctx.fillStyle = "rgba(189, 195, 199, 1)";
         ctx.beginPath();
-        ctx.moveTo(75, 40);
-        ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
-        ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
-        ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
-        ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
-        ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
-        ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+        ctx.arc(this.location.x, this.location.y, 30, Math.PI*2, 0, false);
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(16, 12, 8, 1)";
+        ctx.fillStyle = "rgba(16, 12, 8, 1)";
+        ctx.beginPath();
+        ctx.arc(this.location.x+15, this.location.y, 30, Math.PI*2, 0, false);
         ctx.fill();
         ctx.restore();
 
-
         // ctx.beginPath();
-        // ctx.arc(this.location.x, this.location.y, 30, Math.PI*2, 0, false);
+        // ctx.moveTo(75, 40);
+        // ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+        // ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+        // ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+        // ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+        // ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+        // ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
         // ctx.fill();
         // ctx.restore();
   }
@@ -44,7 +48,9 @@ Heart.prototype.render = function(){
 // Move the mover in a random direction
 Heart.prototype.update = function(){
     if(!game.gamePaused){
-        this.location.add(this.velocity);
+      this.velocity.add(this.acceleration);
+      this.velocity.limit(2);
+      this.location.add(this.velocity);
     }
 }
 
