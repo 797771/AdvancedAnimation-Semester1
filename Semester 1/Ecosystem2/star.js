@@ -38,7 +38,7 @@ Star.prototype.render = function(){
 
 // Move the mover in a random direction
 Star.prototype.update = function(){
-  let h = game.hearts;
+  let h = game.moons;
   let b = game.stars;
   for(let i = 0; i<b.length;i++){
     for(let j = 0; j<h.length;j++){

@@ -10,7 +10,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.movers = [];
-    this.createMovers(this.canvas, 1);
+    this.createMovers(this.canvas, 3);
 
     //   create the array of bubble objects
     this.stars = [];
@@ -28,9 +28,9 @@ function Game(){
         this.stars.push(new Star(x, y, dx, dy, clr));
     }
 
-    this.hearts = [];
-    let numHearts = 4;
-    for(var i = 0; i < numHearts; i++){
+    this.moons = [];
+    let numMoons = 4;
+    for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
         x = Math.random()*this.canvas.width;
         y = Math.random()*this.canvas.height;
@@ -40,7 +40,7 @@ function Game(){
         g = 255;
         b = 255;
         clr = "rgba(" + r + ", "+ g + ","+ b +")"
-        this.hearts.push(new Heart(x, y, dx, dy, clr));
+        this.moons.push(new Moon(x, y, dx, dy, clr));
       }
 
 
@@ -49,8 +49,8 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.hearts.length; i++){
-    this.hearts[i].run();
+    for(let i = 0; i < this.moons.length; i++){
+    this.moons[i].run();
    }
     for(let i = 0; i < this.stars.length; i++){
       this.stars[i].run();
