@@ -25,11 +25,13 @@ Snake.prototype.render = function(){
     for(let i=0;i<this.numSegments;i++){
       ctx.strokeStyle = this.clr;
       ctx.beginPath();
-      ctx.arc(locx,locy, rad, Math.PI*2, 0, false);
+      ctx.arc(locx, locy, rad, Math.PI*2, 0, false);
       ctx.stroke();
-      locx= locx-rad;
-      locy= locy-rad;
-      rad = rad-2;
+      locx= locx-rad-5;
+      locy= locy-rad-5;
+      if(rad-2 >0){
+        rad = rad-2;
+      }
     }
   }
 
@@ -44,17 +46,11 @@ Snake.prototype.update = function(){
 
 Snake.prototype.checkEdges = function(){
     let canvas = game.canvas;
-    if (this.location.x > canvas.width){
-      this.location.x = 0;
-    }
-    else if(this.location.x < 0){
-      this.location.x = canvas.width;
-    }
-    if (this.location.y > canvas.height){
-      this.location.y = 0;
-    }
-    else if(this.location.y < 0){
-      this.location.y = canvas.height;
-    }
 
+    if (this.location.x > canvas.width || this.location.x < 0){
+      this.velocity.x = -this.velocity.x;
+    }
+    if (this.location.y > canvas.height || this.location.y < 0){
+      this.velocity.y = -this.velocity.y;
+    }
   }

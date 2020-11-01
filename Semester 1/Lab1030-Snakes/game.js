@@ -33,7 +33,7 @@ Game.prototype.createSnakes = function(canvas, numSnakes){
     g = Math.random()*155;
     b = Math.random()*155;
     clr = "rgba(" + r + ", "+ g + ","+ b +")"
-    numSegments = Math.floor(Math.random()*12)+5;
+    numSegments = 10;
     this.snakes.push(new Snake(x, y, dx, dy, clr, numSegments));
   }
 }
