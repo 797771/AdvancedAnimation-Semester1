@@ -1,60 +1,52 @@
 function Snake(x, y, dx, dy, clr, numSegments){
-  this.x = x;
-  this.y = y;
-  this.dx = dx;
-  this.dy = dy;
+  this.mover = new Mover(x, y, dx, dy, 10, clr);
   this.clr = clr;
   this.segments = [];
   this.numSegments = numSegments;
 
   //create segments
   for(let i=0;i<this.numSegments;i++){
-    this.segments.push(new Segment(this.x, this.y, this.dx, this.dy, this.clr));
+    let location = new JSVector(x-(10*(i+1)), y-(10*(i+1)));
+    this.segments.push(location);
   }
 }
 
 Snake.prototype.run = function(){
-    this.checkEdges();
+    this.mover.run();
     this.update();
     this.render();
 }
 
 
 Snake.prototype.render = function(){
-    let x = this.segments[0].location.x;
-    let y = this.segments[0].location.y;
+    let ctx = game.ctx;
     for(var i = 0;i<this.numSegments;i++){
-      this.segments[i].render(x, y);
-      x-=10;
-      y-=10;
+      ctx.strokeStyle = this.clr;
+      ctx.fillStyle = this.clr;
+      ctx.beginPath();
+      ctx.arc(this.segments[i].location.x, this.segments[i].location.y, 10, Math.PI*2, 0, false);
+      ctx.stroke();
+      ctx.fill();
     }
 
   }
 
+//A segment that is not a mover moves by first
+//finding the vector difference between itself and the segment in front of it.
 Snake.prototype.update = function(){
     if(!game.gamePaused){
-      for(let i=1;i<this.numSegments;i++){
-        let dir = this.segments[i-1].velocity.getDirection();
-        this.segments[i].velocity.setDirection(dir);
-      }
       for(let i=0;i<this.numSegments;i++){
-        this.segments[i].location.add(this.segments[i].velocity);
+        if(i=0){
+          let vel = JSVector.subGetNew(this.mover.location, this.segments[i].location);
+        }
+        else if{
+          let vel = JSVector.subGetNew(this.segments[i-1].location, this.segments[i].location);
+        }
+        this.segments[i].location.add(vel);
       }
     }
 }
 
-Snake.prototype.checkEdges = function(){
-    let canvas = game.canvas;
-
-    for(let i=0;i<this.numSegments;i++){
-      if (this.segments[i].location.x > canvas.width || this.segments[i].location.x < 0){
-        this.segments[i].velocity.x = -this.segments[i].velocity.x;
-      }
-      if (this.segments[i].location.y > canvas.height || this.segments[i].location.y < 0){
-        this.segments[i].velocity.y = -this.segments[i].velocity.y;
-      }
-    }
-}
 
 // function Snake(x, y, dx, dy, clr, numSegments){
 //   this.location = new JSVector(x, y);
