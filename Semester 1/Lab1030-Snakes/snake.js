@@ -35,7 +35,7 @@ Snake.prototype.render = function(){
 Snake.prototype.update = function(){
     if(!game.gamePaused){
       for(let i=0;i<this.numSegments;i++){
-        if(i==0){
+        if(i===0){
           let vel = JSVector.subGetNew(this.mover.location, this.segments[i]);
         }
         else if{
