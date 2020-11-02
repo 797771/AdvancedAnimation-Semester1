@@ -6,8 +6,7 @@ function Snake(x, y, dx, dy, clr, numSegments){
 
   //create segments
   for(let i=0;i<this.numSegments;i++){
-    let location = new JSVector(x-(10*(i+1)), y-(10*(i+1)));
-    this.segments.push(location);
+    this.segments[i] = new JSVector(x-(10*(i+1)), y-(10*(i+1)));
   }
 }
 
@@ -24,7 +23,7 @@ Snake.prototype.render = function(){
       ctx.strokeStyle = this.clr;
       ctx.fillStyle = this.clr;
       ctx.beginPath();
-      ctx.arc(this.segments[i].location.x, this.segments[i].location.y, 10, Math.PI*2, 0, false);
+      ctx.arc(this.segments[i].x, this.segments[i].y, 10, Math.PI*2, 0, false);
       ctx.stroke();
       ctx.fill();
     }
@@ -36,13 +35,13 @@ Snake.prototype.render = function(){
 Snake.prototype.update = function(){
     if(!game.gamePaused){
       for(let i=0;i<this.numSegments;i++){
-        if(i=0){
-          let vel = JSVector.subGetNew(this.mover.location, this.segments[i].location);
+        if(i==0){
+          let vel = JSVector.subGetNew(this.mover.location, this.segments[i]);
         }
         else if{
-          let vel = JSVector.subGetNew(this.segments[i-1].location, this.segments[i].location);
+          let vel = JSVector.subGetNew(this.segments[i-1], this.segments[i]);
         }
-        this.segments[i].location.add(vel);
+        this.segments[i].add(vel);
       }
     }
 }
