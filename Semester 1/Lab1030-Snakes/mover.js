@@ -8,7 +8,7 @@ function Mover(x, y, dx, dy, radius, clr){
 Mover.prototype.run = function(){
     this.checkEdges();
     this.update();
-    this.render();
+    //this.render();
 
 }
 
