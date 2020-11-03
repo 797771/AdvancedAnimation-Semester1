@@ -14,16 +14,16 @@ Mover.prototype.run = function(){
 
 
 // draw the bubble on the canvas
-Mover.prototype.render = function(){
-    let ctx = game.ctx;
-
-    ctx.strokeStyle = this.clr;
-    ctx.fillStyle = this.clr;
-    ctx.beginPath();
-    ctx.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
-    ctx.stroke();
-    ctx.fill();
-  }
+// Mover.prototype.render = function(){
+//     let ctx = game.ctx;
+//
+//     ctx.strokeStyle = this.clr;
+//     ctx.fillStyle = this.clr;
+//     ctx.beginPath();
+//     ctx.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
+//     ctx.stroke();
+//     ctx.fill();
+//   }
 
 // Move the bubble in a random direction
 Mover.prototype.update = function(){
