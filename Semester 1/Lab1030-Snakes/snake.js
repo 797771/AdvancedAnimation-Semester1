@@ -6,7 +6,6 @@ function Snake(x, y, dx, dy, clr, numSegments){
 
   //create segments
   for(let i=0;i<this.numSegments;i++){
-    // this.segments[i] = new JSVector(x-(20*i), y-(20*i));
     this.segments[i] = new JSVector(x, y);
   }
 }
@@ -38,7 +37,7 @@ Snake.prototype.update = function(){
         }
         else{
           let vB = JSVector.subGetNew(this.segments[i-1], this.segments[i]);
-          vB = new JSVector(vB.x-15, vB.y-15);
+          vB = new JSVector(vB.x-17, vB.y-17);
           this.segments[i] = JSVector.addGetNew(this.segments[i], vB);
         }
        }
