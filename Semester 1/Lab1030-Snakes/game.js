@@ -9,7 +9,7 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
     this.snakes = [];
-    this.createSnakes(this.canvas, 2);
+    this.createSnakes(this.canvas, 10);
 
 }
 
@@ -24,7 +24,7 @@ Game.prototype.run = function(){
 
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i<numSnakes;i++){
-    var x, y, dx, dy, r, g, b, clr;
+    var x, y, dx, dy, r, g, b, clr, numSegments;
     x = Math.random()*this.canvas.width;
     y = Math.random()*this.canvas.height;
     dx = Math.random()*2-1;
@@ -33,7 +33,7 @@ Game.prototype.createSnakes = function(canvas, numSnakes){
     g = Math.random()*155;
     b = Math.random()*155;
     clr = "rgba(" + r + ", "+ g + ","+ b +")"
-    numSegments = 10;
+    numSegments = 15;
     this.snakes.push(new Snake(x, y, dx, dy, clr, numSegments));
   }
 }

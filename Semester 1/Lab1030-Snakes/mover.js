@@ -9,7 +9,6 @@ Mover.prototype.run = function(){
     this.checkEdges();
     this.update();
     //this.render();
-
 }
 
 
