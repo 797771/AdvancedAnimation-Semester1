@@ -12,7 +12,7 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
    for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
      let angleVel = numOrbs*0.01;
-     this.orbiters.push(new Orbiter(this, 1, 100, a, angleVel, this.orbitclr));
+     this.orbiters.push(new Orbiter(this, 1, 50, a, angleVel, this.orbitclr));
    }
 }
 
@@ -56,17 +56,11 @@ Mover.prototype.update = function(){
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Mover.prototype.checkEdges = function(){
     let canvas = game.canvas;
-    if (this.location.x > canvas.width){
-      this.location.x = 0;
+    if (this.location.x > canvas.width || this.location.x < 0){
+      this.velocity.x = -this.velocity.x;
     }
-    else if(this.location.x < 0){
-      this.location.x = canvas.width;
-    }
-    if (this.location.y > canvas.height){
-      this.location.y = 0;
-    }
-    else if(this.location.y < 0){
-      this.location.y = canvas.height;
+    if (this.location.y > canvas.height || this.location.y < 0){
+      this.velocity.y = -this.velocity.y;
     }
 
   }

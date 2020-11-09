@@ -10,7 +10,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.movers = [];
-    this.createMovers(this.canvas, 3);
+    this.createMovers(this.canvas, 1);
 
     //   create the array of bubble objects
     this.stars = [];
@@ -43,7 +43,8 @@ function Game(){
         this.moons.push(new Moon(x, y, dx, dy, clr));
       }
 
-
+      this.snakes = [];
+      this.createSnakes(this.canvas, 2);
 }
 
 // function to run the game each animation cycle
@@ -58,19 +59,38 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();
     }
+    for(let i = 0; i < this.snakes.length; i++){
+      this.snakes[i].run();
+    }
   }
 }
 
 Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, numOrbs;
-    radius = 30;
+    radius = 15;
     x = Math.random()*this.canvas.width;
     y = Math.random()*this.canvas.height;
     dx = Math.random()*2-1;
     dy = Math.random()*2-1;
     clr = "rgba(8, 146, 208, 1)"
-    numOrbs = 40;
+    numOrbs = 25;
     this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
+  }
+}
+
+Game.prototype.createSnakes = function(canvas, numSnakes){
+  for(var i = 0; i<numSnakes;i++){
+    var x, y, dx, dy, r, g, b, clr, numSegments;
+    x = Math.random()*this.canvas.width;
+    y = Math.random()*this.canvas.height;
+    dx = Math.random()*2-1;
+    dy = Math.random()*2-1;
+    r = Math.random()*200+55;
+    g = Math.random()*155;
+    b = Math.random()*155;
+    clr = "rgba(" + r + ", "+ g + ","+ b +")"
+    numSegments = 15;
+    this.snakes.push(new Snake(x, y, dx, dy, clr, numSegments));
   }
 }
