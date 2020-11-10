@@ -10,7 +10,7 @@ function Game(){
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
     this.movers = [];
-    this.createMovers(this.canvas, 1);
+    this.createMovers(this.canvas, 3);
 
     //   create the array of bubble objects
     this.stars = [];
