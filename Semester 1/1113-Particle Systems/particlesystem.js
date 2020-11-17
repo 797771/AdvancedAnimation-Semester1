@@ -9,8 +9,8 @@ ParticleSystem.prototype.run = function(){
 }
 
 ParticleSystem.prototype.addParticle = function(){
-  let rad = 15;
-  let clr = "rbga(0, 0, 0)";
+  let rad = 10;
+  let clr = "rbga(192,192,192, 0.3)";
   this.particles.push(new Particle(this.emitloc.x, this.emitloc.y, rad, clr));
 }
 

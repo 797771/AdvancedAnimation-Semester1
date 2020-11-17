@@ -9,13 +9,22 @@ function Game(){
 
     //create particle system
     let x = this.canvas.width/2;
-    let y = this.canvas.height/2;
-    this.psystem = new ParticleSystem(x, y);
+    let y = this.canvas.height-100;
+
+    this.psystems = [];
+
+    //create multiple particle systems
+    for(var i = 0;i<3;i++){
+      this.psystems.push(new ParticleSystem(x-300, y))
+      x+=300;
+    }
 }
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    this.psystem.run();
+    for(var i = 0;i<this.psystems.length;i++){
+      this.psystems[i].run();
+    }
   }
 }

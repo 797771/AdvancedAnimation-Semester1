@@ -10,7 +10,7 @@ function init(){
 
 //  animation loop called 60 fps
 function animate(){
-  game.ctx.fillStyle = 'rgba(211,211,211, 211)'
+  game.ctx.fillStyle = 'rgba(129, 207, 224, 1)'
   game.ctx.fillRect(0,0,game.canvas.width,game.canvas.height);
   game.run();    // run the game
   requestAnimationFrame(animate);
