@@ -10,10 +10,14 @@ function Snake(x, y, dx, dy, clr, numSegments){
     this.segments[i] = new JSVector(x-d, y-d);
     d=d-20;
   }
+
+  //create particle ParticleSystem
+  this.psystem = new ParticleSystem(this.snakemover.location.x, this.snakemover.location.y);
 }
 
 Snake.prototype.run = function(){
     this.snakemover.run();
+    this.psystem.run();
     this.update();
     this.render();
 }
@@ -51,5 +55,5 @@ Snake.prototype.update = function(){
           this.segments[i] = JSVector.addGetNew(this.segments[i-1], vB);
         }
        }
-     }
+       }
 }
