@@ -18,14 +18,11 @@ Particle.prototype.render = function(){
   ctx.fillStyle = this.clr;
   ctx.save();
   ctx.beginPath();
-  // ctx.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
-  // ctx.stroke();
-  // ctx.fill();
   ctx.translate(this.location.x, this.location.y);
-  ctx.moveTo(-6, -6);
-  ctx.lineTo(0, 6);
-  ctx.lineTo(6, -6);
-  ctx.lineTo(-6, -6);
+  ctx.moveTo(-3, -3);
+  ctx.lineTo(0, 3);
+  ctx.lineTo(3, -3);
+  ctx.lineTo(-3, -3);
   ctx.stroke();
   ctx.fill()
   ctx.restore();

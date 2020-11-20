@@ -3,9 +3,9 @@ function ParticleSystem(x, y){
   this.emitloc = new JSVector(x, y);
 }
 
-ParticleSystem.prototype.run = function(){
+ParticleSystem.prototype.run = function(x, y){
   this.addParticle();
-  this.update();
+  this.update(x, y);
 }
 
 ParticleSystem.prototype.addParticle = function(){
@@ -14,9 +14,10 @@ ParticleSystem.prototype.addParticle = function(){
   this.particles.push(new Particle(this.emitloc.x, this.emitloc.y, rad, clr));
 }
 
-ParticleSystem.prototype.update = function(){
+ParticleSystem.prototype.update = function(x, y){
   for(var i = this.particles.length-1;i>=0;i--){
     let p = this.particles[i];
+    this.emitloc = new JSVector(x, y);
     p.run();
     if(p.isDead()){
       this.particles.splice(i, 1);
