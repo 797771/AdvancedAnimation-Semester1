@@ -5,23 +5,44 @@ function Vehicle(location){
   this.velocity = new JSVector(dx, dy);
   this.accleration = new JSVector(0,0);
   this.desiredSep = 10; //desired separation between vehicles
-  this.clr = "rgba(180,0,220,.8)";
+  this.clr = "rgba(30, 139, 195, 1)";
   this.maxSpeed = document.getElementById("slider2").value;
   this.maxForce = document.getElementById("slider1").value;
 }
 
-Vehicle.protoype.run = function(){
+Vehicle.prototype.run = function(vehicles){
   this.flock(vehicles);
   this.update();
   this.checkEdges();
   this.render();
 }
 
-Vehicle.protoype.render = function(){
+Vehicle.prototype.render = function(){
+  let ctx = game.ctx;
+  ctx.strokeStyle = this.clr;
+  ctx.fillStyle = this.clr;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(this.location.x, this.location.y);
+  ctx.rotate(this.velocity.getDirection());
+  ctx.lineTo(-8, -8);
+  ctx.lineTo(0, -5);
+  ctx.lineTo(8, -8);
+  ctx.lineTo(0, 0);
+  ctx.stroke();
+  ctx.fill();
+  ctx.restore();
 
 }
 
-Vehicle.protoype.update = function(){
+Vehicle.prototype.update = function(){
+  if(!game.gamePaused){
+    this.velocity.add(this.accleration);
+    this.velocity.limit(3);
+    this.location.add(this.velocity);
+
+  }
 
 }
 
@@ -35,7 +56,7 @@ Vehicle.prototype.checkEdges = function(){
     }
   }
 
-Vehicle.protoype.flock = function(vehicles){
+Vehicle.prototype.flock = function(vehicles){
   //flock force is the accumulation of all forces
   let flockForce = new JSVector(0, 0);
   //set up force vectors to be added to acceleration
@@ -57,7 +78,7 @@ Vehicle.protoype.flock = function(vehicles){
   this.acceleration.add(flockForce);
 }
 
-Vehicle.protoype.separate = function(vehicles){
+Vehicle.prototype.separate = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
@@ -80,9 +101,10 @@ Vehicle.protoype.separate = function(vehicles){
     else{
       return new JSVector(0,0);
     }
+  }
 }
 
-Vehicle.protoype.align = function(vehicles){
+Vehicle.prototype.align = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
@@ -105,7 +127,7 @@ Vehicle.protoype.align = function(vehicles){
   }
 }
 
-Vehicle.protoype.cohesion = function(vehicles){
+Vehicle.prototype.cohesion = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
@@ -124,7 +146,7 @@ Vehicle.protoype.cohesion = function(vehicles){
   }
 }
 
-Vehicle.protoype.seek = function(target){
+Vehicle.prototype.seek = function(target){
   let desired = JSVector.sub(target, this.location);
   desired.normalize();
   desired.multiply(maxSpeed);

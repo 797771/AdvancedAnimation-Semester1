@@ -22,9 +22,15 @@ function Game(){
         slider.addEventListener('input',updateSlider);  // update display value when it changes
     }
 
-} //++++++++++++++++++++++  end Game
-
+    this.vehicles = [];
+    for(int i=0;i<100;i++){
+      this.vehicles.add(new Vehicle(new JSVector(Math.random()*1000, Math.random()*800)));
+    }
+}
 // function to run the game each animation cycle
 Game.prototype.run = function(){
+  for(int i=0;i<numVehicles;i++){
+    this.vehicles[i].run(this.vehicles);
+  }
 
 }
