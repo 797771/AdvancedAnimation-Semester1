@@ -23,13 +23,14 @@ function Game(){
     }
 
     this.vehicles = [];
-    for(int i=0;i<100;i++){
-      this.vehicles.add(new Vehicle(new JSVector(Math.random()*1000, Math.random()*800)));
+    this.numVehicles = 100;
+    for(var i=0;i<this.numVehicles;i++){
+      this.vehicles.push(new Vehicle(new JSVector(Math.random()*1000, Math.random()*800)));
     }
 }
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-  for(int i=0;i<numVehicles;i++){
+  for(var i=0;i<this.numVehicles;i++){
     this.vehicles[i].run(this.vehicles);
   }
 

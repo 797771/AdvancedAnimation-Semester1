@@ -3,7 +3,7 @@ function Vehicle(location){
   let dx = Math.random()*4-2;
   let dy = Math.random()*4-2;
   this.velocity = new JSVector(dx, dy);
-  this.accleration = new JSVector(0,0);
+  this.acceleration = new JSVector(0,0);
   this.desiredSep = 10; //desired separation between vehicles
   this.clr = "rgba(30, 139, 195, 1)";
   this.maxSpeed = document.getElementById("slider2").value;
@@ -38,7 +38,7 @@ Vehicle.prototype.render = function(){
 
 Vehicle.prototype.update = function(){
   if(!game.gamePaused){
-    this.velocity.add(this.accleration);
+    this.velocity.add(this.acceleration);
     this.velocity.limit(3);
     this.location.add(this.velocity);
 
@@ -82,9 +82,9 @@ Vehicle.prototype.separate = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
-    let d = JSVector.distance(this.location, vehicles[i].location);
+    let d = this.location.distance(vehicles[i].location);
     if((d>0) && (d<this.desiredSep)){
-        let diff = JSVector.sub(this.location, vehicles[i].location);
+        let diff = this.location.sub(vehicles[i].location);
         diff.normalize();
         diff.divide(d);
         sum.add(diff);
@@ -93,9 +93,9 @@ Vehicle.prototype.separate = function(vehicles){
     if(count>0){
       sum.divide(count);
       sum.normalize();
-      sum.multiply(maxSpeed);
-      let steer = JSVector.sub(sum, this.velocity);
-      steer.limit(maxForce);
+      sum.multiply(this.maxSpeed);
+      let steer = sum.sub(this.velocity);
+      steer.limit(this.maxForce);
       return steer;
     }
     else{
@@ -108,7 +108,7 @@ Vehicle.prototype.align = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
-    let d = JSVector.distance(this.location, vehicles[i].location);
+    let d = this.location.distance(vehicles[i].location);
     if((d>0) && (d<this.desiredSep)){
       sum.add(vehicles[i].velocity);
       count++;//keep track of number of vehicles within distance
@@ -117,9 +117,9 @@ Vehicle.prototype.align = function(vehicles){
   if(count>0){
     sum.divide(count);
     sum.normalize();
-    sum.multiply(maxSpeed);
-    let steer = JSVector.sub(sum, this.velocity);
-    steer.limit(maxForce);
+    sum.multiply(this.maxSpeed);
+    let steer = sum.sub(this.velocity);
+    steer.limit(this.maxForce);
     return steer;
   }
   else{
@@ -131,7 +131,7 @@ Vehicle.prototype.cohesion = function(vehicles){
   let sum = new JSVector(0,0);
   let count = 0;
   for(var i=0; i<vehicles.length;i++){
-    let d = JSVector.distance(this.location, vehicles[i].location);
+    let d = this.location.distance(vehicles[i].location);
     if((d>0) && (d<this.desiredSep)){
       sum.add(vehicles[i].location);
       count++;//keep track of number of vehicles within distance
@@ -147,10 +147,10 @@ Vehicle.prototype.cohesion = function(vehicles){
 }
 
 Vehicle.prototype.seek = function(target){
-  let desired = JSVector.sub(target, this.location);
+  let desired = target.sub(this.location);
   desired.normalize();
-  desired.multiply(maxSpeed);
-  let steer = JSVector.sub(desired, this.velocity);
-  steer.limit(maxForce);
+  desired.multiply(this.maxSpeed);
+  let steer = desired.sub(this.velocity);
+  steer.limit(this.maxForce);
   return steer;
 }
