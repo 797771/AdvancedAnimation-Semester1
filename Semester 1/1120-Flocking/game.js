@@ -1,4 +1,5 @@
 function Game(){
+  game = this;
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
@@ -25,7 +26,7 @@ function Game(){
     this.vehicles = [];
     this.numVehicles = 100;
     for(var i=0;i<this.numVehicles;i++){
-      this.vehicles.push(new Vehicle(new JSVector(Math.random()*1000, Math.random()*800)));
+      this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height)));
     }
 }
 // function to run the game each animation cycle
