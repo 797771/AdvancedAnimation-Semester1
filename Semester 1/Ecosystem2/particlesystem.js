@@ -10,8 +10,8 @@ ParticleSystem.prototype.run = function(x, y){
 
 ParticleSystem.prototype.addParticle = function(){
   let rad = 5;
-  let clr = "rbga(255, 0, 0, 1)";
-  this.particles.push(new Particle(this.emitloc.x, this.emitloc.y, rad, clr));
+  let pclr = "rbga(255, 255, 255)";
+  this.particles.push(new Particle(this.emitloc.x, this.emitloc.y, rad, pclr));
 }
 
 ParticleSystem.prototype.update = function(x, y){

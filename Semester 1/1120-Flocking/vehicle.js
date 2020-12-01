@@ -27,9 +27,9 @@ Vehicle.prototype.render = function(){
   ctx.beginPath();
   ctx.translate(this.location.x, this.location.y);
   ctx.rotate(this.velocity.getDirection()-Math.PI/2);
-  ctx.moveTo(-6, -8);
-  ctx.lineTo(0, -5);
-  ctx.lineTo(6, -8);
+  ctx.moveTo(-5, -10);
+  ctx.lineTo(0, -7);
+  ctx.lineTo(5, -10);
   ctx.lineTo(0, 0);
   ctx.stroke();
   ctx.fill();
@@ -89,8 +89,6 @@ Vehicle.prototype.flock = function(vehicles){
 
 Vehicle.prototype.separate = function(vehicles){
   let sepForce = new JSVector(0,0);
-  // let sum = new JSVector(0,0);
-  // let count = 0;
   for(var i=0; i<vehicles.length;i++){
     let diff = JSVector.subGetNew(this.location, vehicles[i].location);
     let d = diff.getMagnitude();

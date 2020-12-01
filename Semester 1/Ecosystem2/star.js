@@ -38,13 +38,13 @@ Star.prototype.render = function(){
 
 // Move the mover in a random direction
 Star.prototype.update = function(){
-  let h = game.moons;
-  let b = game.stars;
-  for(let i = 0; i<b.length;i++){
-    for(let j = 0; j<h.length;j++){
-      let d = b[i].location.distance(h[j].location);
+  let m = game.moons;
+  let s = game.stars;
+  for(let i = 0; i<s.length;i++){
+    for(let j = 0; j<m.length;j++){
+      let d = s[i].location.distance(m[j].location);
       if(d<100){
-        this.attract = JSVector.subGetNew(h[j].location, b[i].location);
+        this.attract = JSVector.subGetNew(m[j].location, s[i].location);
         this.attract.normalize();
         this.attract.multiply(0.05);
       }

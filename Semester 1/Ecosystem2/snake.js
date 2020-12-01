@@ -11,7 +11,7 @@ function Snake(x, y, dx, dy, clr, numSegments){
     d=d-20;
   }
 
-  //create particle ParticleSystem
+  //create  ParticleSystem
   this.psystem = new ParticleSystem(this.snakemover.location.x, this.snakemover.location.y);
 }
 
@@ -27,14 +27,14 @@ Snake.prototype.render = function(){
     let ctx = game.ctx;
     for(var i = 0;i<this.numSegments;i++){
         ctx.strokeStyle = "rgba(0, 0, 0)";
-        ctx.fillStyle = "rgba(92, 62, 45, 1)";
+        ctx.fillStyle = this.clr;
         ctx.save();
         ctx.beginPath();
         ctx.lineWidth = 2;
         ctx.arc(this.segments[i].x, this.segments[i].y, 5, Math.PI*2, 0, false);
         ctx.fill();
         ctx.stroke();
-        ctx.strokeStyle = "rgba(92, 62, 45, 1)";
+        ctx.strokeStyle = this.clr;
         ctx.translate(this.segments[i].x, this.segments[i].y);
         ctx.moveTo(-6, -6);
         ctx.lineTo(0, 8);

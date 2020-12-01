@@ -9,6 +9,13 @@ function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
  }
 
 Orbiter.prototype.update = function(){
+  // let particles = snake.psystem;
+  // for(var i =0; i<particles.length; i++){
+  //   let d = this.location.distance(particles[i].location);
+  //   if(d<50){
+  //     this.radius-=5;
+  //   }
+  // }
   this.rotator.rotate(this.angleVel);
   this.location = JSVector.addGetNew(this.mover.location, this.rotator);
 }
