@@ -3,6 +3,7 @@ function Snake(x, y, dx, dy, clr, numSegments){
   this.clr = clr;
   this.segments = [];
   this.numSegments = numSegments;
+  this.rad = 5;
 
   //create segments
   let d = 20;
@@ -31,7 +32,7 @@ Snake.prototype.render = function(){
         ctx.save();
         ctx.beginPath();
         ctx.lineWidth = 2;
-        ctx.arc(this.segments[i].x, this.segments[i].y, 5, Math.PI*2, 0, false);
+        ctx.arc(this.segments[i].x, this.segments[i].y, this.rad, Math.PI*2, 0, false);
         ctx.fill();
         ctx.stroke();
         ctx.strokeStyle = this.clr;

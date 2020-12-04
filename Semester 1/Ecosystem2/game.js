@@ -44,7 +44,7 @@ function Game(){
       }
 
       this.snakes = [];
-      this.createSnakes(this.canvas, 1);
+      this.createSnakes(this.canvas, 5);
 }
 
 // function to run the game each animation cycle

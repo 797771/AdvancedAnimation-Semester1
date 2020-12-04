@@ -7,22 +7,29 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.clr = clr;
   this.orbiters = [];
   this.orbitclr = "rgba(102, 255, 0, 1)"
+  this.orbitRad = 50;
 
   //create all orbiters
    for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
      let angleVel = numOrbs*0.01;
-     this.orbiters.push(new Orbiter(this, 1, 50, a, angleVel, this.orbitclr));
+     this.orbiters.push(new Orbiter(this, 1, this.orbitRad, a, angleVel, this.orbitclr));
    }
+
 }
 
 Mover.prototype.run = function(){
   //mover shrinks when touching particles from snake
-  let particles = game.snakes[0].psystem;
-  for(var i = 0; i<particles.length; i++){
-    let d = this.location.distance(particles[i].location);
-    if(d<50){
-      this.radius-=5;
+  for(var j=0; j<game.snakes.length;j++){
+    let particles = game.snakes[j].psystem.particles;
+    for(var i = 0; i<particles.length; i++){
+      let d = this.location.distance(particles[i].location);
+      if(d<50 && this.radius>3){
+        this.radius-=0.01;
+        if(this.orbitRad>10){
+          this.orbitRad-=0.05;
+        }
+      }
     }
   }
     this.checkEdges();
@@ -32,6 +39,7 @@ Mover.prototype.run = function(){
     //update and render orbiters
     for(let i=0; i<this.orbiters.length;i++){
       let orb = this.orbiters[i];
+      orb.rotator.setMagnitude(this.orbitRad);
       orb.update();
       orb.render();
     }
