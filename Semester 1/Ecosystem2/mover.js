@@ -17,6 +17,14 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
 }
 
 Mover.prototype.run = function(){
+  //mover shrinks when touching particles from snake
+  let particles = game.snakes[0].psystem;
+  for(var i = 0; i<particles.length; i++){
+    let d = this.location.distance(particles[i].location);
+    if(d<50){
+      this.radius-=5;
+    }
+  }
     this.checkEdges();
     this.update();
     this.render();

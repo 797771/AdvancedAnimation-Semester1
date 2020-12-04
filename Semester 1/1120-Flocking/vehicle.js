@@ -42,7 +42,6 @@ Vehicle.prototype.update = function(){
     this.velocity.add(this.acceleration);
     this.velocity.limit(game.slider2.value);
     this.location.add(this.velocity);
-
   }
 
 }
