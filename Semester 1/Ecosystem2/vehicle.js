@@ -20,20 +20,6 @@ Vehicle.prototype.run = function(vehicles){
 
 Vehicle.prototype.render = function(){
   let ctx = game.ctx;
-  // ctx.strokeStyle = this.clr;
-  // ctx.fillStyle = this.clr;
-  //
-  // ctx.save();
-  // ctx.beginPath();
-  // ctx.translate(this.location.x, this.location.y);
-  // ctx.rotate(this.velocity.getDirection()-Math.PI/2);
-  // ctx.moveTo(-5, -10);
-  // ctx.lineTo(0, -7);
-  // ctx.lineTo(5, -10);
-  // ctx.lineTo(0, 0);
-  // ctx.stroke();
-  // ctx.fill();
-  // ctx.restore();
 
 
       ctx.strokeStyle = "rgba(247, 202, 24, 1)";

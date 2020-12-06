@@ -12,21 +12,6 @@ function Game(){
     this.movers = [];
     this.createMovers(this.canvas, 3);
 
-    //   create the array of bubble objects
-    // this.stars = [];
-    // let numStars = 10;
-    // for(var i = 0; i < numStars; i++){
-    //     var x, y, dx, dy, clr, r, g, b;
-    //     x = Math.random()*this.canvas.width;
-    //     y = Math.random()*this.canvas.height;
-    //     dx = Math.random()*6-3;
-    //     dy = Math.random()*6-3;
-    //     r = 255;
-    //     g = 255;
-    //     b = 255;
-    //     clr = "rgba(" + r + ", "+ g + ","+ b +")"
-    //     this.stars.push(new Star(x, y, dx, dy, clr));
-    // }
 
     this.moons = [];
     let numMoons = 4;
@@ -47,7 +32,7 @@ function Game(){
       this.createSnakes(this.canvas, 5);
 
       this.vehicles = [];
-      this.numVehicles = 20;
+      this.numVehicles = 40;
       for(var i=0;i<this.numVehicles;i++){
         this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height)));
       }
@@ -59,9 +44,7 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.moons.length; i++){
     this.moons[i].run();
    }
-    // for(let i = 0; i < this.stars.length; i++){
-    //   this.stars[i].run();
-    // }
+
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();
     }
