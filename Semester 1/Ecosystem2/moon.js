@@ -23,22 +23,34 @@ Moon.prototype.render = function(){
         ctx.strokeStyle = "rgba(189, 195, 199, 1)";
         ctx.fillStyle = "rgba(189, 195, 199, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x, this.location.y, 30, Math.PI*2, 0, false);
+        ctx.arc(this.location.x, this.location.y, 15, Math.PI*2, 0, false);
         ctx.fill();
 
         ctx.strokeStyle = "rgba(16, 12, 8, 1)";
         ctx.fillStyle = "rgba(16, 12, 8, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x+15, this.location.y, 30, Math.PI*2, 0, false);
+        ctx.arc(this.location.x+10, this.location.y, 15, Math.PI*2, 0, false);
         ctx.fill();
         ctx.restore();
   }
 
 // Move the mover in a random direction
 Moon.prototype.update = function(){
+  let m=game.moons;
+  for(var i = 0;i<m.length;i++){
+    if(this !== m[i]){
+      let d = this.location.distance(m[i].location);
+      if(d<100){//repell
+            this.acceleration = JSVector.subGetNew(this.location, m[i].location);
+            this.acceleration.normalize();
+            this.acceleration.multiply(0.05);
+      }
+    }
+  }
+
     if(!game.gamePaused){
       this.velocity.add(this.acceleration);
-      this.velocity.limit(2);
+      this.velocity.limit(3);
       this.location.add(this.velocity);
     }
 }

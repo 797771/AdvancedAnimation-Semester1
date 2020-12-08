@@ -14,7 +14,7 @@ function Game(){
 
 
     this.moons = [];
-    let numMoons = 4;
+    let numMoons = 25;
     for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
         x = Math.random()*this.canvas.width;
