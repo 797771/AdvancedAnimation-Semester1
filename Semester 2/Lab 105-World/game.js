@@ -62,38 +62,48 @@ Game.prototype.run = function(){
     // translate canvas1 according to the location of the canvas in the world
     ctx1.save();
     ctx1.translate(this.canvas1Loc.x*(-1), this.canvas1Loc.y*(-1));
-    ctx1.restore();
+
     // draw the bounds of the world in canvas1
-    ctx1.save();
     ctx1.strokeStyle = "rgba(0, 230, 64, 1)"
     ctx1.beginPath();
-    ctx1.strokeRect(-2000, -1500, 4000, 3000);
-    ctx1.restore();
+    ctx1.lineWidth = 3;
+    ctx1.strokeRect(this.world.left, this.world.top, this.world.width, this.world.height);
+
     // draw the x and y axes of the world in canvas1
-    ctx1.save();
     ctx1.strokeStyle = "rgba(240, 52, 52, 1)"
     ctx1.beginPath();
-    ctx1.moveTo(0, -1500);
-    ctx1.lineTo(0, 1500);
+    ctx1.moveTo(0, this.world.top);
+    ctx1.lineTo(0, this.world.bottom);
     ctx1.stroke();
-    ctx1.moveTo(-2000, 0);
-    ctx1.lineTo(2000, 0);
+    ctx1.moveTo(this.world.left, 0);
+    ctx1.lineTo(this.world.right, 0);
     ctx1.stroke();
-    ctx1.restore();
+
     // scale canvas2 to contain the entire world
     ctx2.save();
-    ctx2.strokeStyle = "rgba(0, 230, 64, 1)"
     ctx2.beginPath();
-    ctx1.strokeRect(-2000, -1500, 4000, 3000);
-    ctx2.scale(0.5, 0.5);
-    ctx2.strokeRect(-2000, -1500, 4000, 3000);
+    ctx2.lineWidth = 30;
+    ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
+    ctx2.scale(this.scaleX, this.scaleY);
+
+    //center canvas2 in world
+    ctx2.translate(this.world.width/2, this.world.height/2);
+
+    //draw outline in canvas2
+    ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
+    ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
+
+    //draw x and y axes
+    ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
+    ctx2.moveTo(0, this.world.top);
+    ctx2.lineTo(0, this.world.bottom);
+    ctx2.stroke();
+    ctx2.moveTo(this.world.left, 0);
+    ctx2.lineTo(this.world.right, 0);
+    ctx2.stroke();
+
+    ctx1.restore();
     ctx2.restore();
-    // center the world in canvas2
-
-    // draw the x and y axes of the world
-
-
-    // draw the outline of canvas1 in canvas2
 
     // run all the actors
 
