@@ -33,12 +33,12 @@ SnakeMover.prototype.update = function(){
 
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 SnakeMover.prototype.checkEdges = function(){
-    let canvas = game.canvas1;
-    if (this.location.x > canvas.width || this.location.x < 0){
-      this.velocity.x = -this.velocity.x;
-    }
-    if (this.location.y > canvas.height || this.location.y < 0){
-      this.velocity.y = -this.velocity.y;
-    }
+  let world = game.world;
+  if (this.location.x > world.right || this.location.x < world.left){
+    this.velocity.x = -this.velocity.x;
+  }
+  if (this.location.y < world.top || this.location.y > world.bottom){
+    this.velocity.y = -this.velocity.y;
+  }
 
   }

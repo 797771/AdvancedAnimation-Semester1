@@ -26,6 +26,20 @@ Particle.prototype.render = function(){
   ctx.stroke();
   ctx.fill()
   ctx.restore();
+
+  let ctx2 = game.context2;
+  ctx2.strokeStyle = this.clr;
+  ctx2.fillStyle = this.clr;
+  ctx2.save();
+  ctx2.beginPath();
+  ctx2.translate(this.location.x, this.location.y);
+  ctx2.moveTo(-3, -3);
+  ctx2.lineTo(0, 3);
+  ctx2.lineTo(3, -3);
+  ctx2.lineTo(-3, -3);
+  ctx2.stroke();
+  ctx2.fill()
+  ctx2.restore();
 }
 
 Particle.prototype.update = function(){

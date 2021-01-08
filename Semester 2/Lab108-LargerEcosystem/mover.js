@@ -58,6 +58,15 @@ Mover.prototype.render = function(){
         ctx.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
         ctx.stroke();
         ctx.fill();
+
+        let ctx2 = game.context2;
+
+            ctx2.strokeStyle = "rgba(255, 255, 255, 255)";
+            ctx2.fillStyle = this.clr;
+            ctx2.beginPath();
+            ctx2.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
+            ctx2.stroke();
+            ctx2.fill();
   }
 
 // Move the bubble in a random direction
@@ -69,14 +78,14 @@ Mover.prototype.update = function(){
     }
 }
 
-// When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
+
 Mover.prototype.checkEdges = function(){
-    let canvas = game.canvas1;
-    if (this.location.x > canvas.width || this.location.x < 0){
-      this.velocity.x = -this.velocity.x;
-    }
-    if (this.location.y > canvas.height || this.location.y < 0){
-      this.velocity.y = -this.velocity.y;
-    }
+  let world = game.world;
+  if (this.location.x > world.right || this.location.x < world.left){
+    this.velocity.x = -this.velocity.x;
+  }
+  if (this.location.y < world.top || this.location.y > world.bottom){
+    this.velocity.y = -this.velocity.y;
+  }
 
   }

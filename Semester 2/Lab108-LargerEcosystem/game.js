@@ -47,15 +47,15 @@ function Game(){
 
     //ecosystem creatures
     this.movers = [];
-    this.createMovers(this.canvas1, 3);
+    this.createMovers(this.world, 40);
 
 
     this.moons = [];
-    let numMoons = 25;
+    let numMoons = 30;
     for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
-        x = Math.random()*this.canvas1.width;
-        y = Math.random()*this.canvas1.height;
+        x = Math.random()*this.world.width-this.world.width/2;
+        y = Math.random()*this.world.height-this.world.height/2;
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         r = 255;
@@ -66,12 +66,12 @@ function Game(){
       }
 
       this.snakes = [];
-      this.createSnakes(this.canvas1, 5);
+      this.createSnakes(this.world, 25);
 
       this.vehicles = [];
       this.numVehicles = 40;
       for(var i=0;i<this.numVehicles;i++){
-        this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.canvas1.width, Math.random()*this.canvas1.height)));
+        this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.world.width-this.world.width/2, Math.random()*this.world.height-this.world.height/2)));
       }
 
 }//++++++++++++++++++++++  end game constructor
@@ -88,6 +88,48 @@ Game.prototype.run = function(){
     ctx2.fillStyle =  "rgba(0, 0, 0)";
     ctx2.fillRect(0,0,cnv2.width,cnv2.height);
 
+    // translate canvas1 according to the location of the canvas in the world
+    ctx1.save();
+    ctx1.translate(this.canvas1Loc.x*(-1), this.canvas1Loc.y*(-1));
+
+    // draw the bounds of the world in canvas1
+    ctx1.strokeStyle = "rgba(0, 230, 64, 1)"
+    ctx1.beginPath();
+    ctx1.lineWidth = 3;
+    ctx1.strokeRect(this.world.left, this.world.top, this.world.width, this.world.height);
+
+    // draw the x and y axes of the world in canvas1
+    // ctx1.strokeStyle = "rgba(240, 52, 52, 1)"
+    // ctx1.beginPath();
+    // ctx1.moveTo(0, this.world.top);
+    // ctx1.lineTo(0, this.world.bottom);
+    // ctx1.stroke();
+    // ctx1.moveTo(this.world.left, 0);
+    // ctx1.lineTo(this.world.right, 0);
+    // ctx1.stroke();
+
+    // scale canvas2 to contain the entire world
+    ctx2.save();
+    ctx2.beginPath();
+    ctx2.lineWidth = 30;
+    ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
+    ctx2.scale(this.scaleX, this.scaleY);
+
+    //center canvas2 in world
+    ctx2.translate(this.world.width/2, this.world.height/2);
+
+    //draw outline in canvas2
+    ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
+    ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
+
+    //draw x and y axes
+    // ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
+    // ctx2.moveTo(0, this.world.top);
+    // ctx2.lineTo(0, this.world.bottom);
+    // ctx2.stroke();
+    // ctx2.moveTo(this.world.left, 0);
+    // ctx2.lineTo(this.world.right, 0);
+    // ctx2.stroke();
 
     // run all the actors
 
@@ -107,48 +149,7 @@ Game.prototype.run = function(){
       }
     }
 
-    // translate canvas1 according to the location of the canvas in the world
-    ctx1.save();
-    ctx1.translate(this.canvas1Loc.x*(-1), this.canvas1Loc.y*(-1));
 
-    // draw the bounds of the world in canvas1
-    ctx1.strokeStyle = "rgba(0, 230, 64, 1)"
-    ctx1.beginPath();
-    ctx1.lineWidth = 3;
-    ctx1.strokeRect(this.world.left, this.world.top, this.world.width, this.world.height);
-
-    // draw the x and y axes of the world in canvas1
-    ctx1.strokeStyle = "rgba(240, 52, 52, 1)"
-    ctx1.beginPath();
-    ctx1.moveTo(0, this.world.top);
-    ctx1.lineTo(0, this.world.bottom);
-    ctx1.stroke();
-    ctx1.moveTo(this.world.left, 0);
-    ctx1.lineTo(this.world.right, 0);
-    ctx1.stroke();
-
-    // scale canvas2 to contain the entire world
-    ctx2.save();
-    ctx2.beginPath();
-    ctx2.lineWidth = 30;
-    ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
-    ctx2.scale(this.scaleX, this.scaleY);
-
-    //center canvas2 in world
-    ctx2.translate(this.world.width/2, this.world.height/2);
-
-    //draw outline in canvas2
-    ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
-    ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
-
-    //draw x and y axes
-    ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
-    ctx2.moveTo(0, this.world.top);
-    ctx2.lineTo(0, this.world.bottom);
-    ctx2.stroke();
-    ctx2.moveTo(this.world.left, 0);
-    ctx2.lineTo(this.world.right, 0);
-    ctx2.stroke();
 
     ctx1.restore();
     ctx2.restore();
@@ -159,8 +160,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, numOrbs;
     radius = 15;
-    x = Math.random()*this.canvas1.width;
-    y = Math.random()*this.canvas1.height;
+    x = Math.random()*this.world.width-this.world.width/2;
+    y = Math.random()*this.world.height-this.world.height/2;
     dx = Math.random()*2-1;
     dy = Math.random()*2-1;
     clr = "rgba(8, 146, 208, 1)"
@@ -172,8 +173,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i<numSnakes;i++){
     var x, y, dx, dy, r, g, b, clr, numSegments;
-    x = Math.random()*this.canvas1.width;
-    y = Math.random()*this.canvas1.height;
+    x = Math.random()*this.world.width-this.world.width/2;
+    y = Math.random()*this.world.height-this.world.height/2;
     dx = Math.random()*2-1;
     dy = Math.random()*2-1;
     clr = "rgba(92, 62, 45, 1)";

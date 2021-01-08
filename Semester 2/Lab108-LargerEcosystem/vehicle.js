@@ -39,6 +39,26 @@ Vehicle.prototype.render = function(){
       ctx.fill();
       ctx.restore();
 
+      let ctx2 = game.context2;
+
+
+          ctx2.strokeStyle = "rgba(247, 202, 24, 1)";
+          ctx2.fillStyle = "rgba(247, 202, 24, 1)";
+
+          ctx2.save();
+          ctx2.beginPath();
+          ctx2.translate(this.location.x, this.location.y);
+          ctx2.rotate(this.velocity.getDirection()-Math.PI/2);
+          ctx2.moveTo(-8, -8);
+          ctx2.lineTo(0, 10);
+          ctx2.lineTo(6, -8);
+          ctx2.lineTo(-10, 1);
+          ctx2.lineTo(10, 1);
+          ctx2.lineTo(-8, -8);
+          ctx2.stroke();
+          ctx2.fill();
+          ctx2.restore();
+
 }
 
 Vehicle.prototype.update = function(){
@@ -51,18 +71,18 @@ Vehicle.prototype.update = function(){
 }
 
 Vehicle.prototype.checkEdges = function(){
-  let canvas = game.canvas1;
-  if (this.location.x > canvas.width){
-    this.location.x = 0;
+  let world = game.world;
+  if (this.location.x > world.right){
+    this.location.x = world.left;
   }
-  else if(this.location.x < 0){
-    this.location.x = canvas.width;
+  else if(this.location.x < world.left){
+    this.location.x = world.right;
   }
-  if (this.location.y > canvas.height){
-    this.location.y = 0;
+  if (this.location.y < world.top){
+    this.location.y = world.bottom;
   }
-  else if(this.location.y < 0){
-    this.location.y = canvas.height;
+  else if(this.location.y > world.bottom){
+    this.location.y = world.top;
   }
   }
 

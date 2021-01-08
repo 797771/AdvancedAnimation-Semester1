@@ -46,6 +46,27 @@ Snake.prototype.render = function(){
         ctx.restore();
     }
 
+    let ctx2 = game.context2;
+    for(var i = 0;i<this.numSegments;i++){
+        ctx2.strokeStyle = "rgba(0, 0, 0)";
+        ctx2.fillStyle = this.clr;
+        ctx2.save();
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.arc(this.segments[i].x, this.segments[i].y, this.rad, Math.PI*2, 0, false);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.strokeStyle = this.clr;
+        ctx2.translate(this.segments[i].x, this.segments[i].y);
+        ctx2.moveTo(-6, -6);
+        ctx2.lineTo(0, 8);
+        ctx2.lineTo(6, -6);
+        ctx2.lineTo(-6, -6);
+        ctx2.stroke();
+        ctx2.fill();
+        ctx2.restore();
+    }
+
   }
 
 Snake.prototype.update = function(){
