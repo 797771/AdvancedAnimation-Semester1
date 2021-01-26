@@ -24,11 +24,23 @@ class EcoSystem {
         //  set number of cells in world
         this.cells = new Array(this.numRows);
 
+        // //clicking on cells to make them occupied or not
+        // window.addEventListener("click", function (event) {
+        //     switch (event.code) {
+        //
+        //     }
+        // }, false);
+
         //  load a 2D array of Cell objects
         for(let r=0; r<this.cells.length; r++){
           this.cells[r] = new Array(this.numCols);
           for(let c=0; c<this.numCols; c++){
-            this.cells[r][c] = new Cell(this, r, c);
+            if(Math.random()*10 < 3){
+              this.cells[r][c] = new Cell(this, r, c, true);
+            }
+            else{
+              this.cells[r][c] = new Cell(this, r, c, false);
+            }
           }
         }
               // canvas2 is scaled according to the ratio of its
@@ -117,12 +129,18 @@ class EcoSystem {
         ctx2.rect(c1x, c1y, cnv1.width, cnv1.height);
         ctx2.stroke();
 
-        //  Render the cells in the 2D array
+
+        //  Render the cells in the 2D array, something about absolute value
         for(let r=0;r<this.numRows; r++){
           for(let c=0; c<this.numCols; c++){
-            this.cells[r][c].run();
+            if(this.cells[r][c].loc.x>=this.canvas1Loc.x && this.cells[r][c].loc.x<=(this.canvas1Loc.x+cnv1.width)){
+              if(this.cells[r][c].loc.y>=this.canvas1Loc.y && this.cells[r][c].loc.x<=(this.canvas1Loc.y+cnv1.height)){
+                this.cells[r][c].run();
+              }
+            }
           }
         }
+
 
         ctx1.restore();
         ctx2.restore();
