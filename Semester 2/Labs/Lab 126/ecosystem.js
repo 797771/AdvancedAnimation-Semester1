@@ -71,6 +71,18 @@ class EcoSystem {
                     break;
             }
         }, false);
+
+        this.canvas1.addEventListener("click", function(e){
+          // this.xCoor = col*this.width+this.es.world.left;
+          // this.yCoor = row*this.height+this.es.world.top;
+          let c = Math.floor((e.offsetX+ecoSystem.canvas1Loc.x-ecoSystem.world.left)/ecoSystem.cellWidth);
+          let r = Math.floor((e.offsetY+ecoSystem.canvas1Loc.y-ecoSystem.world.top)/ecoSystem.cellHeight);
+          if((c>=0 && c<ecoSystem.numCols) && (r>=0 && r<ecoSystem.numRows)){
+            // console.log("c = "+ c);
+            // console.log("r = "+ r);
+            ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
+          }
+        });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
 
     // function to run the game each animation cycle
@@ -130,16 +142,41 @@ class EcoSystem {
         ctx2.stroke();
 
 
-        //  Render the cells in the 2D array, something about absolute value
-        for(let r=0;r<this.numRows; r++){
-          for(let c=0; c<this.numCols; c++){
-            if(this.cells[r][c].loc.x>=this.canvas1Loc.x && this.cells[r][c].loc.x<=(this.canvas1Loc.x+cnv1.width)){
-              if(this.cells[r][c].loc.y>=this.canvas1Loc.y && this.cells[r][c].loc.x<=(this.canvas1Loc.y+cnv1.height)){
+        //  Render the cells in the 2D array
+        let firstR = Math.floor((this.canvas1Loc.y-this.world.top)/this.cellHeight);
+        if(firstR<0){
+          firstR=0;
+        }
+        let lastR= Math.floor(firstR + (cnv1.height/this.cellHeight));
+        if(lastR>=this.numRows){
+          lastR = this.numRows-1;
+        }
+        let firstC = Math.floor((this.canvas1Loc.x-this.world.left)/this.cellWidth);
+        if(firstC<0){
+          firstC=0;
+        }
+        let lastC = Math.floor((this.canvas1Loc.x-this.world.left+cnv1.width)/this.cellWidth);
+        if(lastC>=this.numCols){
+          lastC = this.numCols-1;
+        };
+
+
+        // for(let r=0;r<this.numRows; r++){
+        //   for(let c=0; c<this.numCols; c++){
+        //     if(this.cells[r][c].loc.x>=this.canvas1Loc.x && this.cells[r][c].loc.x<(this.canvas1Loc.x+cnv1.width)){
+        //       if(this.cells[r][c].loc.y>=this.canvas1Loc.y && this.cells[r][c].loc.y<(this.canvas1Loc.y+cnv1.height)){
+        //         this.cells[r][c].run();
+        //       }
+        //     }
+        //   }
+        // }
+
+        for(let r=firstR;r<=lastR; r++){
+          for(let c=firstC; c<=lastC; c++){
                 this.cells[r][c].run();
-              }
             }
           }
-        }
+
 
 
         ctx1.restore();

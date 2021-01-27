@@ -1,6 +1,7 @@
 class Cell {
     constructor(es, row, col, occ) {
       this.es = es;
+      this.cells = es.cells;
       this.col = col;
       this.row = row;
       this.ctx1 = es.context1;
@@ -10,12 +11,48 @@ class Cell {
       this.yCoor = row*this.height+this.es.world.top;
       this.loc = new JSVector(this.xCoor, this.yCoor);
       this.occupied = occ;
-      if(this.occupied == true){
-        this.clr = "red"
-      }
-      else{
-        this.clr = "rgba(50, 150, 120, 0.2)"
-      }
+
+      // //creating an array of neighbors
+      // this.neighbors = [];
+      // let i=0;
+      // for(let r=0; r<es.numRows; r++){
+      //   for(let c=0; c<es.numCols; c++){
+      //     let cell = this.cells[r][c];
+      //     if(cell.col == this.col && cell.row == this.row-1 && cell.occupied==false){//neighbor directly above
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.col == this.col && cell.row == this.row+1 && cell.occupied==false){//neighbor directly below
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row && cell.col == this.col-1 && cell.occupied==false){//neighbor directly left
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row && cell.col == this.col+1 && cell.occupied==false){//neighbor directly right
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row-1 && cell.col == this.col-1 && cell.occupied==false){//top left diagonal
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row-1 && cell.col == this.col+1 && cell.occupied==false){//top right diagonal
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row+1 && cell.col == this.col-1 && cell.occupied==false){//bottom left diagonal
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //     else if(cell.row == this.row+1 && cell.col == this.col+1 && cell.occupied==false){//bottom right diagonal
+      //       this.neighbors[i] = cell;
+      //       i++;
+      //     }
+      //   }
+      // }
+
     }//  +++++++++  end constructor
 
     run() {
@@ -24,6 +61,12 @@ class Cell {
     }
 
     render() {
+      if(this.occupied == true){
+        this.clr = "red"
+      }
+      else{
+        this.clr = "rgba(50, 150, 120, 0.2)"
+      }
       let ctx1 = this.ctx1;
       ctx1.save();
       ctx1.strokeStyle = "rgba(0,0,0,1)";
