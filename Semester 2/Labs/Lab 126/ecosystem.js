@@ -25,6 +25,7 @@ class EcoSystem {
         this.cells = new Array(this.numRows);
 
 
+        this.arrLoaded = false;
         //  load a 2D array of Cell objects
         for(let r=0; r<this.cells.length; r++){
           this.cells[r] = new Array(this.numCols);
@@ -37,6 +38,8 @@ class EcoSystem {
             }
           }
         }
+        this.arrLoaded = true;
+        
               // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
         // so that the entire world fits within canvas2

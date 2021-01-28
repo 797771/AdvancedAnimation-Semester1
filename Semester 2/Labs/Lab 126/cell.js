@@ -1,7 +1,6 @@
 class Cell {
     constructor(es, row, col, occ) {
       this.es = es;
-      this.cells = es.cells;
       this.col = col;
       this.row = row;
       this.ctx1 = es.context1;
@@ -12,15 +11,14 @@ class Cell {
       this.loc = new JSVector(this.xCoor, this.yCoor);
       this.occupied = occ;
 
-      // this.neighbors = [];
-      // this.neighbors.length = 8;
-      // this.loadNeighbors(this.neighbors);
-
+      this.neighbors = [];
+      this.neighbors.length = 8;
 
     }//  +++++++++  end constructor
 
     run() {
         this.render();
+        this.loadNeighbors(this.neighbors);
     }
 
     render() {
@@ -45,43 +43,45 @@ class Cell {
     }
 
     loadNeighbors(n){
-      for(let r=0; r<this.es.numRows; r++){
-        for(let c=0; c<this.es.numCols; c++){
-          let cell = this.cells[r][c];
-          if(cell.row-1>=0){
-            if(cell.col == this.col && cell.row == this.row-1){//north
-              n[0] = cell;
+      if(this.es.arrLoaded){
+        for(let r=0; r<this.es.numRows; r++){
+          for(let c=0; c<this.es.numCols; c++){
+            let cell = this.es.cells[r][c];
+            if(r-1>=0){
+              if(c == this.col && r == this.row-1){//north
+                n[0] = cell;
+              }
+              else if(r == this.row-1 && c == this.col+1){//ne
+                n[1] = cell;
+              }
+              else if(r == this.row-1 && c == this.col-1){//nw
+                n[7] = cell;
+              }
             }
-            else if(cell.row == this.row-1 && cell.col == this.col+1){//ne
-              n[1] = cell;
+            if(r+1<this.es.numRows){
+              if(c == this.col && r == this.row+1){//south
+                n[4] = cell;
+              }
+              else if(r == this.row+1 && c == this.col+1){//se
+                n[3] = cell;
+              }
+              else if(r == this.row+1 && c == this.col-1){//sw
+                n[5] = cell;
+              }
             }
-            else if(cell.row == this.row-1 && cell.col == this.col-1){//nw
-              n[7] = cell;
+            if(c-1>=0){
+              if(r == this.row && c == this.col-1){//west
+                n[6] = cell;
+              }
             }
-          }
-          if(cell.row+1<es.numRows){
-            if(cell.col == this.col && cell.row == this.row+1){//south
-              n[4] = cell;
-            }
-            else if(cell.row == this.row+1 && cell.col == this.col+1){//se
-              n[3] = cell;
-            }
-            else if(cell.row == this.row+1 && cell.col == this.col-1){//sw
-              n[5] = cell;
-            }
-          }
-          if(cell.col-1>=0){
-            if(cell.row == this.row && cell.col == this.col-1){//west
-              n[6] = cell;
-            }
-          }
-          if(cell.col+1<es.numCols){
-            if(cell.row == this.row && cell.col == this.col+1){//east
-              n[2] = cell;
+            if(c+1<this.es.numCols){
+              if(r == this.row && c == this.col+1){//east
+                n[2] = cell;
+              }
             }
           }
         }
       }
-    }
+  }
 
 }//+++++++++++++++++++++  end of Cell class
