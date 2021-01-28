@@ -12,52 +12,15 @@ class Cell {
       this.loc = new JSVector(this.xCoor, this.yCoor);
       this.occupied = occ;
 
-      // //creating an array of neighbors
       // this.neighbors = [];
-      // let i=0;
-      // for(let r=0; r<es.numRows; r++){
-      //   for(let c=0; c<es.numCols; c++){
-      //     let cell = this.cells[r][c];
-      //     if(cell.col == this.col && cell.row == this.row-1 && cell.occupied==false){//neighbor directly above
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.col == this.col && cell.row == this.row+1 && cell.occupied==false){//neighbor directly below
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row && cell.col == this.col-1 && cell.occupied==false){//neighbor directly left
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row && cell.col == this.col+1 && cell.occupied==false){//neighbor directly right
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row-1 && cell.col == this.col-1 && cell.occupied==false){//top left diagonal
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row-1 && cell.col == this.col+1 && cell.occupied==false){//top right diagonal
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row+1 && cell.col == this.col-1 && cell.occupied==false){//bottom left diagonal
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //     else if(cell.row == this.row+1 && cell.col == this.col+1 && cell.occupied==false){//bottom right diagonal
-      //       this.neighbors[i] = cell;
-      //       i++;
-      //     }
-      //   }
-      // }
+      // this.neighbors.length = 8;
+      // this.loadNeighbors(this.neighbors);
+
 
     }//  +++++++++  end constructor
 
     run() {
         this.render();
-        this.update();
     }
 
     render() {
@@ -81,6 +44,44 @@ class Cell {
       ctx1.restore();
     }
 
-    update() {
+    loadNeighbors(n){
+      for(let r=0; r<this.es.numRows; r++){
+        for(let c=0; c<this.es.numCols; c++){
+          let cell = this.cells[r][c];
+          if(cell.row-1>=0){
+            if(cell.col == this.col && cell.row == this.row-1){//north
+              n[0] = cell;
+            }
+            else if(cell.row == this.row-1 && cell.col == this.col+1){//ne
+              n[1] = cell;
+            }
+            else if(cell.row == this.row-1 && cell.col == this.col-1){//nw
+              n[7] = cell;
+            }
+          }
+          if(cell.row+1<es.numRows){
+            if(cell.col == this.col && cell.row == this.row+1){//south
+              n[4] = cell;
+            }
+            else if(cell.row == this.row+1 && cell.col == this.col+1){//se
+              n[3] = cell;
+            }
+            else if(cell.row == this.row+1 && cell.col == this.col-1){//sw
+              n[5] = cell;
+            }
+          }
+          if(cell.col-1>=0){
+            if(cell.row == this.row && cell.col == this.col-1){//west
+              n[6] = cell;
+            }
+          }
+          if(cell.col+1<es.numCols){
+            if(cell.row == this.row && cell.col == this.col+1){//east
+              n[2] = cell;
+            }
+          }
+        }
+      }
     }
+
 }//+++++++++++++++++++++  end of Cell class

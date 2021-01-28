@@ -24,12 +24,6 @@ class EcoSystem {
         //  set number of cells in world
         this.cells = new Array(this.numRows);
 
-        // //clicking on cells to make them occupied or not
-        // window.addEventListener("click", function (event) {
-        //     switch (event.code) {
-        //
-        //     }
-        // }, false);
 
         //  load a 2D array of Cell objects
         for(let r=0; r<this.cells.length; r++){
@@ -160,16 +154,6 @@ class EcoSystem {
           lastC = this.numCols-1;
         };
 
-
-        // for(let r=0;r<this.numRows; r++){
-        //   for(let c=0; c<this.numCols; c++){
-        //     if(this.cells[r][c].loc.x>=this.canvas1Loc.x && this.cells[r][c].loc.x<(this.canvas1Loc.x+cnv1.width)){
-        //       if(this.cells[r][c].loc.y>=this.canvas1Loc.y && this.cells[r][c].loc.y<(this.canvas1Loc.y+cnv1.height)){
-        //         this.cells[r][c].run();
-        //       }
-        //     }
-        //   }
-        // }
 
         for(let r=firstR;r<=lastR; r++){
           for(let c=firstC; c<=lastC; c++){
