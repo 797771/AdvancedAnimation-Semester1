@@ -47,41 +47,43 @@ class Cell {
         for(let r=0; r<this.es.numRows; r++){
           for(let c=0; c<this.es.numCols; c++){
             let cell = this.es.cells[r][c];
-            if(r-1>=0){
-              if(c == this.col && r == this.row-1){//north
-                n[0] = cell;
+            if(cell.occupied == false){
+              if(r-1>=0){
+                if(c == this.col && r == this.row-1){//north
+                    n[0] = cell;
+                }
+                else if(r == this.row-1 && c == this.col+1){//ne
+                    n[1] = cell;
+                }
+                else if(r == this.row-1 && c == this.col-1){//nw
+                    n[7] = cell;
+                }
               }
-              else if(r == this.row-1 && c == this.col+1){//ne
-                n[1] = cell;
+              if(r+1<this.es.numRows){
+                if(c == this.col && r == this.row+1){//south
+                    n[4] = cell;
+                }
+                else if(r == this.row+1 && c == this.col+1){//se
+                    n[3] = cell;
+                }
+                else if(r == this.row+1 && c == this.col-1){//sw
+                    n[5] = cell;
+                }
               }
-              else if(r == this.row-1 && c == this.col-1){//nw
-                n[7] = cell;
+              if(c-1>=0){
+                if(r == this.row && c == this.col-1){//west
+                    n[6] = cell;
+                }
               }
-            }
-            if(r+1<this.es.numRows){
-              if(c == this.col && r == this.row+1){//south
-                n[4] = cell;
-              }
-              else if(r == this.row+1 && c == this.col+1){//se
-                n[3] = cell;
-              }
-              else if(r == this.row+1 && c == this.col-1){//sw
-                n[5] = cell;
-              }
-            }
-            if(c-1>=0){
-              if(r == this.row && c == this.col-1){//west
-                n[6] = cell;
-              }
-            }
-            if(c+1<this.es.numCols){
-              if(r == this.row && c == this.col+1){//east
-                n[2] = cell;
-              }
+              if(c+1<this.es.numCols){
+                if(r == this.row && c == this.col+1){//east
+                    n[2] = cell;
+                }
             }
           }
         }
       }
+    }
   }
 
 }//+++++++++++++++++++++  end of Cell class
