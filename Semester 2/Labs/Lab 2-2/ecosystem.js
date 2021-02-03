@@ -39,6 +39,8 @@ class EcoSystem {
           }
         }
         this.arrLoaded = true;
+        //position canvas to start at first cell row and col
+        this.canvas1Loc = new JSVector(this.cells[0][0].loc.x, this.cells[0][0].loc.y)
 
               // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
@@ -90,7 +92,7 @@ class EcoSystem {
         let cnv1 = this.canvas1;
         let ctx2 = this.context2;
         let cnv2 = this.canvas2;
-        ctx1.fillStyle = "green";
+        ctx1.fillStyle = "white";
         ctx1.fillRect(0, 0, cnv1.width, cnv1.height);
         ctx2.fillStyle = "white";
         ctx2.fillRect(0, 0, cnv2.width, cnv2.height);

@@ -34,7 +34,7 @@ class Cell {
         this.clr = "red"
       }
       else{
-        this.clr = "rgba(50, 150, 120, 0.2)"
+        this.clr = "green"
       }
       let ctx1 = this.ctx1;
       ctx1.save();
