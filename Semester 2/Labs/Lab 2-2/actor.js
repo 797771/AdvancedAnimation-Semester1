@@ -15,18 +15,18 @@ constructor(){
               break;
           case "KeyS":
               if (this.currentCell.neighbors.s != null)
-                this.loc.y+=ecoSystem.cellHeight;
-                this.currentCell = ecoSystem.cells[this.currentCell.row+1][this.currentCell.col];
+                  this.loc.y+=ecoSystem.cellHeight;
+                  this.currentCell = ecoSystem.cells[this.currentCell.row+1][this.currentCell.col];
               break;
           case "KeyW":
               if (this.currentCell.neighbors.w != null)
-                this.loc.x-=ecoSystem.cellHeight;
-                this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col-1];
+                  this.loc.x-=ecoSystem.cellHeight;
+                  this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col-1];
               break;
           case "KeyD":
               if (this.currentCell.neighbors.e != null)
-                this.loc.x+=ecoSystem.cellHeight;
-                this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col+1];
+                  this.loc.x+=ecoSystem.cellHeight;
+                  this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col+1];
               break;
               break;
       }
