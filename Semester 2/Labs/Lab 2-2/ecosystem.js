@@ -1,5 +1,6 @@
 class EcoSystem {
     constructor() {
+        ecoSystem = this;
         this.canvas1 = document.getElementById('cnv1');
         this.context1 = this.canvas1.getContext('2d');
         this.canvas2 = document.getElementById('cnv2');
@@ -40,7 +41,10 @@ class EcoSystem {
         }
         this.arrLoaded = true;
         //position canvas to start at first cell row and col
-        this.canvas1Loc = new JSVector(this.cells[0][0].loc.x, this.cells[0][0].loc.y)
+        this.canvas1Loc = new JSVector(this.cells[0][0].loc.x, this.cells[0][0].loc.y);
+
+        //creating actor
+        this.actor = new Actor();
 
               // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
@@ -49,27 +53,27 @@ class EcoSystem {
         this.scaleY = this.canvas2.height / this.world.height;
         // add an event handler such that the a, s, w, d keys
         // will reposition the canvas within the world.
-        window.addEventListener("keypress", function (event) {
-            switch (event.code) {
-                case "KeyW":
-                    if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
-                        ecoSystem.canvas1Loc.y -= 20;
-                    break;
-                case "KeyS":
-                    if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
-                        ecoSystem.canvas1Loc.y += 20;
-                    break;
-                case "KeyA":
-                    if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
-                        ecoSystem.canvas1Loc.x -= 20;
-                    break;
-                case "KeyD":
-                    if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
-                        ecoSystem.canvas1Loc.x += 20;
-                    break;
-                    break;
-            }
-        }, false);
+        // window.addEventListener("keypress", function (event) {
+        //     switch (event.code) {
+        //         case "KeyW":
+        //             if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
+        //                 ecoSystem.canvas1Loc.y -= 20;
+        //             break;
+        //         case "KeyS":
+        //             if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
+        //                 ecoSystem.canvas1Loc.y += 20;
+        //             break;
+        //         case "KeyA":
+        //             if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
+        //                 ecoSystem.canvas1Loc.x -= 20;
+        //             break;
+        //         case "KeyD":
+        //             if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
+        //                 ecoSystem.canvas1Loc.x += 20;
+        //             break;
+        //             break;
+        //     }
+        //}, false);
 
         this.canvas1.addEventListener("click", function(e){
           // this.xCoor = col*this.width+this.es.world.left;
@@ -166,8 +170,10 @@ class EcoSystem {
             }
           }
 
-        let ball = new Actor();
-        ball.run();
+
+        this.actor.run();
+
+        this.canvas1Loc = new JSVector(this.actor.currentCell.loc.x-this.cellWidth*3, this.actor.currentCell.loc.y-this.cellHeight*3);
 
         ctx1.restore();
         ctx2.restore();

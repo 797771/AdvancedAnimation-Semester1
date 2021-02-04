@@ -3,39 +3,46 @@ constructor(){
   this.loc = new JSVector(ecoSystem.cells[0][0].loc.x + ecoSystem.cellWidth/2, ecoSystem.cells[0][0].loc.y + ecoSystem.cellHeight/2+15);
   this.currentCell = ecoSystem.cells[0][0];
   this.clr = "blue";
+  //this.direction
+
 
   // add an event handler such that the a, s, w, d keys
   // will move the actor from cell to cell
   window.addEventListener("keypress", function (event) {
+    let actor = ecoSystem.actor;
       switch (event.code) {
-          case "KeyA":
-              if (this.currentCell.neighbors.n != null)
-                  this.loc.y-=ecoSystem.cellHeight;
-                  this.currentCell = ecoSystem.cells[this.currentCell.row-1][this.currentCell.col];
+          case "KeyW":
+              if (actor.currentCell.neighbors.n != null){
+                  actor.loc.y-=ecoSystem.cellHeight;
+                  actor.currentCell = ecoSystem.cells[actor.currentCell.row-1][actor.currentCell.col];
+                }
               break;
           case "KeyS":
-              if (this.currentCell.neighbors.s != null)
-                  this.loc.y+=ecoSystem.cellHeight;
-                  this.currentCell = ecoSystem.cells[this.currentCell.row+1][this.currentCell.col];
+              if (actor.currentCell.neighbors.s != null){
+                  actor.loc.y+=ecoSystem.cellHeight;
+                  actor.currentCell = ecoSystem.cells[actor.currentCell.row+1][actor.currentCell.col];
+                }
               break;
-          case "KeyW":
-              if (this.currentCell.neighbors.w != null)
-                  this.loc.x-=ecoSystem.cellHeight;
-                  this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col-1];
+          case "KeyA":
+              if (actor.currentCell.neighbors.w != null){
+                  actor.loc.x-=ecoSystem.cellWidth;
+                  actor.currentCell = ecoSystem.cells[actor.currentCell.row][actor.currentCell.col-1];
+                }
               break;
           case "KeyD":
-              if (this.currentCell.neighbors.e != null)
-                  this.loc.x+=ecoSystem.cellHeight;
-                  this.currentCell = ecoSystem.cells[this.currentCell.row][this.currentCell.col+1];
+              if (actor.currentCell.neighbors.e != null){
+                  actor.loc.x+=ecoSystem.cellWidth;
+                  actor.currentCell = ecoSystem.cells[actor.currentCell.row][actor.currentCell.col+1];
+                }
               break;
               break;
       }
   }, false);
-}
+}//end constructor
 
 run(){
   this.render();
-  this.update();
+  //this.update();
 }
 
 render(){
