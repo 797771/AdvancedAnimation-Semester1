@@ -50,49 +50,19 @@ class Cell {
       ctx1.restore();
     }
 
-    loadNeighbors(n){
-      if(this.es.arrLoaded){
-        for(let r=0; r<this.es.numRows; r++){
-          for(let c=0; c<this.es.numCols; c++){
-            let cell = this.es.cells[r][c];
-            if(cell.occupied == false){
-              if(r-1>=0){
-                if(c == this.col && r == this.row-1){//north
-                    n.n = cell;
-                }
-                else if(r == this.row-1 && c == this.col+1){//ne
-                    n.ne = cell;
-                }
-                else if(r == this.row-1 && c == this.col-1){//nw
-                    n.nw = cell;
-                }
-              }
-              if(r+1<this.es.numRows){
-                if(c == this.col && r == this.row+1){//south
-                    n.s = cell;
-                }
-                else if(r == this.row+1 && c == this.col+1){//se
-                    n.se = cell;
-                }
-                else if(r == this.row+1 && c == this.col-1){//sw
-                    n.sw = cell;
-                }
-              }
-              if(c-1>=0){
-                if(r == this.row && c == this.col-1){//west
-                    n.w = cell;
-                }
-              }
-              if(c+1<this.es.numCols){
-                if(r == this.row && c == this.col+1){//east
-                    n.e = cell;
-                }
-            }
-          }
-        }
-      }
+    loadNeighbors(){
+    if(this.row>0 && !this.es.cells[this.row-1][this.col].occupied){
+      this.neighbors.n=this.es.cells[this.row-1][this.col];
     }
-
+    if(this.col>0 && !this.es.cells[this.row][this.col-1].occupied){
+      this.neighbors.w=this.es.cells[this.row][this.col-1];
+    }
+    if(this.row<this.es.numRows-1 && !this.es.cells[this.row+1][this.col].occupied){
+      this.neighbors.s=this.es.cells[this.row+1][this.col];
+    }
+    if(this.col<this.es.numCols-1 && !this.es.cells[this.row][this.col+1].occupied){
+      this.neighbors.e=this.es.cells[this.row][this.col+1];
+    }
   }
 
 }//+++++++++++++++++++++  end of Cell class

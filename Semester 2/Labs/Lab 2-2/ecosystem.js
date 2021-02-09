@@ -84,6 +84,8 @@ class EcoSystem {
             // console.log("c = "+ c);
             // console.log("r = "+ r);
             ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
+            ecoSystem.loadNeighbors();
+
           }
         });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
@@ -179,5 +181,12 @@ class EcoSystem {
         ctx2.restore();
     }// ++++++++++++++++++++++++  end run()
 
+    loadNeighbors(){
+      for(let r=0; r<this.numRows;r++){
+        for(let c=0; c<this.numCols;c++){
+          this.cells[r][c].loadNeighbors();
+        }
+      }
+    }
 
 }//  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Class
