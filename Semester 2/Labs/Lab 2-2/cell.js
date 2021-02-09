@@ -13,13 +13,9 @@ class Cell {
 
       this.neighbors = {
         n: null,
-        ne: null,
         e: null,
-        se: null,
         s: null,
-        sw: null,
         w: null,
-        nw: null,
       }
 
     }//  +++++++++  end constructor
