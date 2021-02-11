@@ -32,12 +32,12 @@ class Actor {
           let d = this.loc.distance(this.target);
           this.acc = JSVector.subGetNew(this.target, this.loc);
           this.acc.normalize();
-          this.acc.multiply(0.05);
+          this.acc.multiply(0.08);
           this.vel.add(this.acc);
           this.vel.limit(this.maxSpeed);
           this.loc.add(this.vel);
 
-          if(this.loc==this.target){
+          if(d<=25){
             this.pathIndex++;
             this.currentCell = this.game.path[this.pathIndex];
             this.nextCell = this.game.path[this.pathIndex+1];
