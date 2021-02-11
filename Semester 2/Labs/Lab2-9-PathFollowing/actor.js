@@ -3,6 +3,7 @@
 
 class Actor {
     constructor(game){
+        this.game = game;
         // start off the actor in the first cell of the path
         this.pathIndex = 0;
         this.currentCell = game.path[this.pathIndex];
@@ -15,6 +16,8 @@ class Actor {
         this.loc = new JSVector(this.currentCell.loc.x + this.currentCell.width/2,
                                 this.currentCell.loc.y + this.currentCell.height/2);
         this.vel = new JSVector(0,0);   // velocity
+        this.acc = new JSVector(0,0);   //steering acceleration
+        this.maxSpeed = 1;
     }
 
     run() {
@@ -26,19 +29,20 @@ class Actor {
         // move this actor along the path until it reaches the end of
         // the path and dies
         if(this.currentCell!=this.lastCell){
-          this.vel = this.target;
-          this.vel.limit(3);
+          let d = this.loc.distance(this.target);
+          this.acc = JSVector.subGetNew(this.target, this.loc);
+          this.acc.normalize();
+          this.acc.multiply(0.05);
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
           this.loc.add(this.vel);
-          this.pathIndex++;
 
-          if(this.loc==this.target){
-            this.currentCell = game.path[this.pathIndex];
-            this.nextCell = game.path[this.pathIndex+1];   // next in the path of cells
-            // where this actor should aim -- the center of the next cell in the path
+          if(d=0){
+            this.pathIndex++;
+            this.currentCell = this.game.path[this.pathIndex];
+            this.nextCell = this.game.path[this.pathIndex+1];
             this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
                                 this.nextCell.loc.y + this.nextCell.height/2);
-                                
-            this.update();
           }
         }
     }
