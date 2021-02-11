@@ -37,7 +37,7 @@ class Actor {
           this.vel.limit(this.maxSpeed);
           this.loc.add(this.vel);
 
-          if(d=0){
+          if(this.loc==this.target){
             this.pathIndex++;
             this.currentCell = this.game.path[this.pathIndex];
             this.nextCell = this.game.path[this.pathIndex+1];
