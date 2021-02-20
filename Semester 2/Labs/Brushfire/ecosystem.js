@@ -5,6 +5,7 @@ class EcoSystem {
         this.canvas2 = document.getElementById('cnv2');
         this.context2 = this.canvas2.getContext('2d');
         this.canvas1Loc = new JSVector();
+        this.valuesSet = false;
 
         this.world = {
             top: -1500,
@@ -41,7 +42,7 @@ class EcoSystem {
         this.arrLoaded = true;
 
         //position canvas to start at first cell row and col
-        this.canvas1Loc = new JSVector(this.cells[0][0].loc.x, this.cells[0][0].loc.y);
+        this.canvas1Loc = new JSVector(this.cells[29][39].loc.x, this.cells[29][39].loc.y);
 
               // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
@@ -167,11 +168,46 @@ class EcoSystem {
             }
           }
 
-
+        this.setValues();
+        this.valuesSet=true;
 
         ctx1.restore();
         ctx2.restore();
     }// ++++++++++++++++++++++++  end run()
+
+
+    setValues(){
+      let lastcell = this.cells[this.numRows-1][this.numCols-1];
+      lastcell.value = 0;
+      for(let r=this.numRows-1; r>0; r--){
+        for(let c=this.numCols-1; c>0; c--){
+          if(this.cells[r][c].neighbors.n != null && this.cells[r][c].neighbors.n.value == 0){//north
+            this.cells[r][c].neighbors.n.value+=10;
+          }
+          if(this.cells[r][c].neighbors.e != null && this.cells[r][c].neighbors.e.value == 0 && this.cells[r][c].neighbors.e != lastcell){//east
+            this.cells[r][c].neighbors.e.value+=10;
+          }
+          if(this.cells[r][c].neighbors.s != null && this.cells[r][c].neighbors.s.value == 0 && this.cells[r][c].neighbors.s != lastcell){//south
+            this.cells[r][c].neighbors.s.value+=10;
+          }
+          if(this.cells[r][c].neighbors.w != null && this.cells[r][c].neighbors.w.value == 0){//west
+            this.cells[r][c].neighbors.w.value+=10;
+          }
+          if(this.cells[r][c].neighbors.ne != null && this.cells[r][c].neighbors.ne.value == 0){//north east
+            this.cells[r][c].neighbors.ne.value+=14;
+          }
+          if(this.cells[r][c].neighbors.se != null && this.cells[r][c].neighbors.se.value == 0 && this.cells[r][c].neighbors.se != lastcell){//south east
+            this.cells[r][c].neighbors.se.value+=14;
+          }
+          if(this.cells[r][c].neighbors.sw != null && this.cells[r][c].neighbors.sw.value == 0){//south west
+            this.cells[r][c].neighbors.sw.value+=14;
+          }
+          if(this.cells[r][c].neighbors.nw != null && this.cells[r][c].neighbors.nw.value == 0){//north west
+            this.cells[r][c].neighbors.nw.value+=14;
+          }
+        }
+      }
+    }
 
 
 }//  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Class
