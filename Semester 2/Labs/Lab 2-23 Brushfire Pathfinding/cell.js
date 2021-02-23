@@ -1,5 +1,6 @@
 class Cell {
     constructor(game, r, c, occ) {
+        this.game = game;
         this.width = game.cellWidth;
         this.height = game.cellHeight;
         let x = c * this.width;
@@ -29,10 +30,10 @@ class Cell {
       else{
         this.clr = "rgba(50, 150, 120, 0.2)"
       }
-      if(this==game.grid[game.numRows-1][game.numCols-1]){
+      if(this==this.game.grid[this.game.numRows-1][this.game.numCols-1]){
         this.clr = "black"
       }
-      let ctx = game.ctx;
+      let ctx = this.game.ctx;
       ctx.strokeStyle = "rgba(0,0,0,1)";
       ctx.fillStyle=this.clr;
       ctx.lineWidth = 1;
@@ -49,17 +50,17 @@ class Cell {
 
     loadNeighbors(n){
       if(this.game.arrLoaded){
-        if(this.row>0 && !this.game.grid[this.row-1][this.col].occupied){//north
-          this.neighbors.n=this.game.grid[this.row-1][this.col];
+        if(this.r>0 && !this.game.grid[this.r-1][this.c].occupied){//north
+          this.neighbors.n=this.game.grid[this.r-1][this.c];
         }
-        if(this.col>0 && !this.game.grid[this.row][this.col-1].occupied){//west
-          this.neighbors.w=this.game.grid[this.row][this.col-1];
+        if(this.c>0 && !this.game.grid[this.r][this.c-1].occupied){//west
+          this.neighbors.w=this.game.grid[this.r][this.c-1];
         }
-        if(this.row<this.es.numRows-1 && !this.game.grid[this.row+1][this.col].occupied){//south
-          this.neighbors.s=this.game.grid[this.row+1][this.col];
+        if(this.r<this.game.numRows-1 && !this.game.grid[this.r+1][this.c].occupied){//south
+          this.neighbors.s=this.game.grid[this.r+1][this.c];
         }
-        if(this.col<this.es.numCols-1 && !this.game.grid[this.row][this.col+1].occupied){//east
-          this.neighbors.e=this.game.grid[this.row][this.col+1];
+        if(this.c<this.game.numCols-1 && !this.game.grid[this.r][this.c+1].occupied){//east
+          this.neighbors.e=this.game.grid[this.r][this.c+1];
         }
     }
   }
