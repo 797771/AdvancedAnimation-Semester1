@@ -32,22 +32,22 @@ function Game(){
     }
     this.arrLoaded=true;
 
-    for(let r =0; r<this.grid.length;r++){
-      for(let c=0; c<this.grid[r].length;c++){
-        this.grid[r][c].loadNeighbors();
-      }
-    }
+    this.loadAllNeighbors();
 
     this.canvas.addEventListener("click", function(e){
       let c = Math.floor((e.offsetX+game.canvas1Loc.x)/game.cellWidth);
       let r = Math.floor((e.offsetY+game.canvas1Loc.y)/game.cellHeight);
       if((c>=0 && c<game.numCols) && (r>=0 && r<game.numRows)){
         game.grid[r][c].occupied = !game.grid[r][c].occupied;
+        game.loadAllNeighbors();
       }
     });
 
     //label distances from endCell
     this.distances();
+
+    //create the actors
+    this.actor = new Actor(this);
 
 }//++++++++++++++++++++++  end Game constructor
 
@@ -64,6 +64,9 @@ Game.prototype.run = function(){
     this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
                     endCell.loc.y + endCell.height/2 + 8);
 
+    //run the actor
+    this.actor.run();
+
 }
 
 Game.prototype.distances = function(){
@@ -76,13 +79,21 @@ Game.prototype.distances = function(){
   while(queue.length>0 && count<2000){
     count++;
     currentCell = queue.shift();
-    console.log("neighbors = " + currentCell.neighbors);
     for(let i=0;i<currentCell.neighbors.length;i++){
       if(!currentCell.neighbors[i].parent && !currentCell.neighbors[i].occupied){
         currentCell.neighbors[i].dist=currentCell.dist+10;
         currentCell.neighbors[i].parent=currentCell;
         queue.push(currentCell.neighbors[i]);
       }
+    }
+  }
+  endCell.dist=0;
+}
+
+Game.prototype.loadAllNeighbors = function(){
+  for(let r =0; r<this.grid.length;r++){
+    for(let c=0; c<this.grid[r].length;c++){
+      this.grid[r][c].loadNeighbors();
     }
   }
 }
