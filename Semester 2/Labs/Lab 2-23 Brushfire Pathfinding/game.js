@@ -32,6 +32,12 @@ function Game(){
     }
     this.arrLoaded=true;
 
+    for(let r =0; r<this.grid.length;r++){
+      for(let c=0; c<this.grid[r].length;c++){
+        this.grid[r][c].loadNeighbors();
+      }
+    }
+
     this.canvas.addEventListener("click", function(e){
       let c = Math.floor((e.offsetX+game.canvas1Loc.x)/game.cellWidth);
       let r = Math.floor((e.offsetY+game.canvas1Loc.y)/game.cellHeight);
@@ -39,6 +45,9 @@ function Game(){
         game.grid[r][c].occupied = !game.grid[r][c].occupied;
       }
     });
+
+    //label distances from endCell
+    this.distances();
 
 }//++++++++++++++++++++++  end Game constructor
 
@@ -55,23 +64,24 @@ Game.prototype.run = function(){
     this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
                     endCell.loc.y + endCell.height/2 + 8);
 
-    //label distances from endCell
-    this.distances();
-
 }
 
 Game.prototype.distances = function(){
   let queue = new Array();
-  let parentCell;
+  let count = 0;
+  let currentCell;
   let endCell = this.grid[this.numRows-1][this.numCols-1];
   endCell.dist = 0;
   queue.push(endCell);
-  for(;queue.length>0;){
-    parentCell = queue.shift();
-    for(let i=0;i<parentCell.neighbors.length;i++){
-      if(10<parentCell.neighbors[i].dist){
-        parentCell.neighbors[i].dist=parentCell.dist+10;
-        queue.push(parentCell.neighbors[i]);
+  while(queue.length>0 && count<2000){
+    count++;
+    currentCell = queue.shift();
+    console.log("neighbors = " + currentCell.neighbors);
+    for(let i=0;i<currentCell.neighbors.length;i++){
+      if(!currentCell.neighbors[i].parent && !currentCell.neighbors[i].occupied){
+        currentCell.neighbors[i].dist=currentCell.dist+10;
+        currentCell.neighbors[i].parent=currentCell;
+        queue.push(currentCell.neighbors[i]);
       }
     }
   }
