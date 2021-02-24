@@ -12,7 +12,10 @@ class Cell {
         this.dist=1000;
         this.parent = null;
         this.clr;
-        if(this.occupied == true){
+        if(r==game.numRows-1 && c==game.numCols-1){
+          this.clr = "blue"
+        }
+        else if(this.occupied == true){
           this.clr = "red"
         }
         else if(!this.parent){
@@ -35,6 +38,8 @@ class Cell {
       ctx.rect(this.loc.x, this.loc.y, this.width, this.height);
       ctx.fill();
       ctx.stroke();
+
+
       // ctx.font = "10px sans-serif";
       // ctx.strokeText(this.dist, this.loc.x+5, this.loc.y+30);
       // ctx.stroke();

@@ -1,7 +1,7 @@
 class Actor {
-    constructor(game){
+    constructor(game, cell){
         this.game = game;
-        this.currentCell = game.grid[0][0];
+        this.currentCell = cell;
         this.loc = new JSVector(this.currentCell.loc.x + this.currentCell.width/2,
                                 this.currentCell.loc.y + this.currentCell.height/2);
         this.nextCell = this.currentCell;

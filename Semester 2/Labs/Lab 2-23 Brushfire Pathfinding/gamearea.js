@@ -14,7 +14,7 @@ function GameArea(){
     // create canvasDiv
     let canvasDiv = document.createElement("div");
     wrapperDiv.appendChild(canvasDiv);  // canvasDiv is child of wrapperDiv
-    canvasDiv.setAttribute("style", " background-color:pink; width:1100px; height:700px;float:left;");
+    canvasDiv.setAttribute("style", "background-color:white; width:1100px; height:700px;float:left;");
 
     // create canvas
     let canvas =  document.createElement("canvas");

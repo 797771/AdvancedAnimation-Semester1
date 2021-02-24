@@ -47,7 +47,13 @@ function Game(){
     this.distances();
 
     //create the actors
-    this.actor = new Actor(this);
+    this.actors = [];
+    for(let i=0;i<10;i++){
+      let r = Math.floor(Math.random()*(this.numRows-1));
+      let c = Math.floor(Math.random()*(this.numCols-1));
+      let cell = this.grid[r][c];
+      this.actors.push(new Actor(this, cell));
+    }
 
 }//++++++++++++++++++++++  end Game constructor
 
@@ -58,14 +64,11 @@ Game.prototype.run = function(){
             this.grid[r][c].run();
         }
     }
-    // Show the end cell
-    this.ctx.font = '18px sans-serif';
-    let endCell = this.grid[this.numRows-1][this.numCols-1];
-    this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
-                    endCell.loc.y + endCell.height/2 + 8);
 
-    //run the actor
-    this.actor.run();
+    // run all the actors
+      for(let i = 0; i < this.actors.length; i++){
+          this.actors[i].run();
+      }
 
 }
 
