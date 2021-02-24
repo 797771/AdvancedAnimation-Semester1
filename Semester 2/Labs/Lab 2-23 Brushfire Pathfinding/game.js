@@ -55,14 +55,24 @@ Game.prototype.run = function(){
     this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
                     endCell.loc.y + endCell.height/2 + 8);
 
+    //label distances from endCell
+    this.distances();
 
 }
 
-Game.prototype.pathFind = function(){
-  let parentCell = this.grid[this.numRows-1][this.numCols-1];
-  // for(){
-  //   for(){
-  //
-  //   }
-  // }
+Game.prototype.distances = function(){
+  let queue = new Array();
+  let parentCell;
+  let endCell = this.grid[this.numRows-1][this.numCols-1];
+  endCell.dist = 0;
+  queue.push(endCell);
+  for(;queue.length>0;){
+    parentCell = queue.shift();
+    for(let i=0;i<parentCell.neighbors.length;i++){
+      if(10<parentCell.neighbors[i].dist){
+        parentCell.neighbors[i].dist=parentCell.dist+10;
+        queue.push(parentCell.neighbors[i]);
+      }
+    }
+  }
 }
