@@ -17,6 +17,7 @@ class Actor {
                                 this.currentCell.loc.y + this.currentCell.height/2);
         this.vel = new JSVector(0,0);   // velocity
         this.acc = new JSVector(0,0);   //steering acceleration
+        this.pulser = new JSVector(0,0);
         this.maxSpeed = 1;
         this.clr="rgba(0, 128, 0)";
     }
@@ -46,6 +47,21 @@ class Actor {
                                 this.nextCell.loc.y + this.nextCell.height/2);
           }
         }
+
+        // //attraction to towers
+        // for(let i=0; i<game.towers.length;i++){
+        //   let towerLoc = game.towers[i].location;
+        //   let d = this.loc.distance(towerLoc);
+        //     if(d>15){//attract
+        //     this.pulser = JSVector.subGetNew(towerLoc, this.loc);
+        //     this.pulser.normalize();
+        //     this.pulser.multiply(0.05);
+        //     }
+        //
+        //   this.vel.add(this.pulser);
+        //   this.vel.limit(1.9);
+        //   this.loc.add(this.vel);
+        // }
     }
 
     render(){
