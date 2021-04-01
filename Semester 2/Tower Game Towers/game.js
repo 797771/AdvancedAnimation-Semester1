@@ -38,34 +38,21 @@ function Game(){
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
-
-    //   create the array of towers
-    this.towers = [];
-    let numTowers = 1;
-    for(var i = 0; i < numTowers; i++){
-        var x, y, rad, clr;
-        x = this.canvas.width/2;
-        y = this.canvas.height/2;
-        rad = 10;
-        clr = 'white';
-        this.towers.push(new Tower(x, y, rad, clr, i)); // add new tower to array
-    }
-
-    ////add tower to clicked cell
-    // this.towers=[];
-    // this.canvas.addEventListener("click", function(t){
-    //   let c = Math.floor((t.offsetX)/game.cellWidth);
-    //   let r = Math.floor((t.offsetY)/game.cellHeight);
-    //   if((c>=0 && c<game.numCols) && (r>=0 && r<game.numRows)){
-    //       if(!game.grid[r][c].isPath){
-    //         let x = game.grid[r][c].loc.x;
-    //         let y = game.grid[r][c].loc.y;
-    //         let rad = 10;
-    //         let clr = "green";
-    //         game.towers.push(x, y, rad, clr);
-    //       }
-    //   }
-    // });
+    //add tower to clicked cell
+    this.towers=[];
+    this.numTowers=0;
+    this.canvas.addEventListener("click", function(t){
+      let c = Math.floor((t.offsetX)/game.cellWidth);
+      let r = Math.floor((t.offsetY)/game.cellHeight);
+      if(!game.grid[r][c].isPath){
+          let x = game.grid[r][c].loc.x+27.4;
+          let y = game.grid[r][c].loc.y+26.8;
+          let rad = 10;
+          let clr = "white";
+          game.towers.push(new Tower(x, y, rad, clr, game.numTowers));
+          game.numTowers++;
+        }
+    });
 
 
 }//++++++++++++++++++++++  end Game constructor
