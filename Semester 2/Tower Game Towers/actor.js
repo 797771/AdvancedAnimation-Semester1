@@ -28,40 +28,28 @@ class Actor {
     }
 
     update(){
-        // move this actor along the path until it reaches the end of
-        // the path and dies
-        if(this.currentCell!=this.lastCell){
-          let d = this.loc.distance(this.target);
-          this.acc = JSVector.subGetNew(this.target, this.loc);
-          this.acc.normalize();
-          this.acc.multiply(0.08);
-          this.vel.add(this.acc);
-          this.vel.limit(this.maxSpeed);
-          this.loc.add(this.vel);
+        //attraction to towers
+        if(game.towers.length == 0){
+          this.followPath();
+        }
+        else{
+          for(let i=0; i<game.towers.length;i++){
+            let towerLoc = game.towers[i].location;
+            let d = this.loc.distance(towerLoc);
+              if(d<30){//attract
+              this.pulser = JSVector.subGetNew(towerLoc, this.loc);
+              this.pulser.normalize();
+              this.pulser.multiply(0.05);
 
-          if(d<=25){
-            this.pathIndex++;
-            this.currentCell = this.game.path[this.pathIndex];
-            this.nextCell = this.game.path[this.pathIndex+1];
-            this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
-                                this.nextCell.loc.y + this.nextCell.height/2);
+              this.vel.add(this.pulser);
+              this.vel.limit(1.9);
+              this.loc.add(this.vel);
+              }
+              else{
+                this.followPath();
+              }
           }
         }
-
-        // //attraction to towers
-        // for(let i=0; i<game.towers.length;i++){
-        //   let towerLoc = game.towers[i].location;
-        //   let d = this.loc.distance(towerLoc);
-        //     if(d>15){//attract
-        //     this.pulser = JSVector.subGetNew(towerLoc, this.loc);
-        //     this.pulser.normalize();
-        //     this.pulser.multiply(0.05);
-        //     }
-        //
-        //   this.vel.add(this.pulser);
-        //   this.vel.limit(1.9);
-        //   this.loc.add(this.vel);
-        // }
     }
 
     render(){
@@ -73,4 +61,25 @@ class Actor {
         ctx.fill();
         ctx.stroke();
     }
+
+    followPath(){
+      if(this.currentCell!=this.lastCell){
+        let d = this.loc.distance(this.target);
+        this.acc = JSVector.subGetNew(this.target, this.loc);
+        this.acc.normalize();
+        this.acc.multiply(0.08);
+        this.vel.add(this.acc);
+        this.vel.limit(this.maxSpeed);
+        this.loc.add(this.vel);
+
+        if(d<=25){
+          this.pathIndex++;
+          this.currentCell = this.game.path[this.pathIndex];
+          this.nextCell = this.game.path[this.pathIndex+1];
+          this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
+                              this.nextCell.loc.y + this.nextCell.height/2);
+        }
+      }
+    }
+
 }
