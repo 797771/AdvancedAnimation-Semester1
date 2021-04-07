@@ -36,10 +36,8 @@ function Game(){
     // Create an actor to follow the path.
     // Additional actors may be created periodically.
     this.actors = [];
-    this.numActors = 10;
-    for(let i=0;i<this.numActors;i++){
-      this.actors.push(new Actor(this));
-    }
+    this.actors.push(new Actor(this));
+    setInterval(this.addActor,5000);
 
 
     //add tower to clicked cell
@@ -82,7 +80,13 @@ Game.prototype.run = function(){
         this.actors[i].run();
     }
     for(let i = 0; i < this.towers.length; i++){
-      this.towers[i].run();    // run each tower
+      if(this.towers[i].numCaught<4){
+        this.towers[i].run();    // run each tower
+      }
    }
 
+}
+
+Game.prototype.addActor = function(){
+ game.actors.push(new Actor(game));
 }

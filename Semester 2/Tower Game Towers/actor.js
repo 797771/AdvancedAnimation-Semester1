@@ -22,6 +22,7 @@ class Actor {
         this.clr="rgba(0, 128, 0)";
         this.rad=6;
         this.closeT;
+        this.caught = 0;
     }
 
     run() {
@@ -39,6 +40,9 @@ class Actor {
           let towerLoc = this.closeT.location;
           let d = this.loc.distance(towerLoc);
           if(d<100){
+            if(this.caught = 0){
+              game.towers[i].numCaught++;
+            }
             this.pulser = JSVector.subGetNew(towerLoc, this.loc);
             this.pulser.normalize();
             this.pulser.multiply(0.05);

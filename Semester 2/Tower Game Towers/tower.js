@@ -3,6 +3,7 @@ function Tower(x, y, rad, clr, tNum){
   this.rad = rad;
   this.clr = clr;
   this.tNum = tNum;
+  this.numCaught = 0;
 
   //create the array of movers for each tower
   this.movers = [];
@@ -20,8 +21,8 @@ function Tower(x, y, rad, clr, tNum){
 }
 
 Tower.prototype.run = function(){
-    this.update();
-    this.render();
+      this.update();
+      this.render();
   }
 
 
