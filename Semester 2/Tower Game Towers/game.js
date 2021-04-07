@@ -36,7 +36,11 @@ function Game(){
     // Create an actor to follow the path.
     // Additional actors may be created periodically.
     this.actors = [];
-    this.actors.push(new Actor(this));  // one actor initially
+    this.numActors = 10;
+    for(let i=0;i<this.numActors;i++){
+      this.actors.push(new Actor(this));
+    }
+
 
     //add tower to clicked cell
     this.towers=[];

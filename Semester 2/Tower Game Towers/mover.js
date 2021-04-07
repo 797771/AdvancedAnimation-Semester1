@@ -30,19 +30,20 @@ Mover.prototype.update = function(){
     let towerLoc = game.towers[this.towerNum].location;
     let d = this.location.distance(towerLoc);
 
-    if(d<4){//repell
-          this.pulser = JSVector.subGetNew(this.location, towerLoc);
+      if(d<2){//repell
+            this.pulser = JSVector.subGetNew(this.location, towerLoc);
+            this.pulser.normalize();
+            this.pulser.multiply(0.05);
+      }
+
+      if(d>1){//attract
+          this.pulser = JSVector.subGetNew(towerLoc, this.location);
           this.pulser.normalize();
           this.pulser.multiply(0.05);
-    }
+      }
 
-    if(d>2){//attract
-        this.pulser = JSVector.subGetNew(towerLoc, this.location);
-        this.pulser.normalize();
-        this.pulser.multiply(0.05);
-    }
 
     this.velocity.add(this.pulser);
-    this.velocity.limit(1.9);
+    this.velocity.limit(2);
     this.location.add(this.velocity);
 }

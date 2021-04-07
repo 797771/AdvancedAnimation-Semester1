@@ -6,7 +6,7 @@ function Tower(x, y, rad, clr, tNum){
 
   //create the array of movers for each tower
   this.movers = [];
-  let numMovers = 30;
+  let numMovers = 50;
   for(var i = 0; i < numMovers; i++){
       var x, y, dx, dy, rad, clr;
       x = this.location.x;
@@ -14,7 +14,7 @@ function Tower(x, y, rad, clr, tNum){
       dx=Math.random()*3-2;
       dy=Math.random()*3-2;
       rad = 2.5;
-      clr = this.clr;
+      clr = "rgba(255, 255, 255, 0.7)";
       this.movers.push(new Mover(x, y, dx, dy, rad, clr, this.tNum)); // add new mover to array
   }
 }

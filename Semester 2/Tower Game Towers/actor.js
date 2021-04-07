@@ -20,6 +20,8 @@ class Actor {
         this.pulser = new JSVector(0,0);
         this.maxSpeed = 1;
         this.clr="rgba(0, 128, 0)";
+        this.rad=6;
+        this.closeT;
     }
 
     run() {
@@ -33,31 +35,33 @@ class Actor {
           this.followPath();
         }
         else{
-          for(let i=0; i<game.towers.length;i++){
-            let towerLoc = game.towers[i].location;
-            let d = this.loc.distance(towerLoc);
-              if(d<30){//attract
-              this.pulser = JSVector.subGetNew(towerLoc, this.loc);
-              this.pulser.normalize();
-              this.pulser.multiply(0.05);
+          this.findCloseTower();
+          let towerLoc = this.closeT.location;
+          let d = this.loc.distance(towerLoc);
+          if(d<100){
+            this.pulser = JSVector.subGetNew(towerLoc, this.loc);
+            this.pulser.normalize();
+            this.pulser.multiply(0.05);
 
-              this.vel.add(this.pulser);
-              this.vel.limit(1.9);
-              this.loc.add(this.vel);
-              }
-              else{
-                this.followPath();
-              }
+            this.vel.add(this.pulser);
+            this.vel.limit(1.5);
+            this.loc.add(this.vel);
+            if(this.rad>3){
+              this.rad-=0.05;;
+            }
+          }
+          else{
+            this.followPath();
           }
         }
-    }
+  }
 
     render(){
         let ctx = game.ctx;
         ctx.strokeStyle = this.clr;
         ctx.fillStyle = this.clr;
         ctx.beginPath();
-        ctx.arc(this.loc.x, this.loc.y, 6, 0, Math.PI*2);
+        ctx.arc(this.loc.x, this.loc.y, this.rad, 0, Math.PI*2);
         ctx.fill();
         ctx.stroke();
     }
@@ -78,6 +82,18 @@ class Actor {
           this.nextCell = this.game.path[this.pathIndex+1];
           this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
                               this.nextCell.loc.y + this.nextCell.height/2);
+        }
+      }
+    }
+
+    findCloseTower(){
+      let minD = 1200;
+      for(let i=0; i<game.towers.length;i++){
+        let towerLoc = game.towers[i].location;
+        let d = this.loc.distance(towerLoc);
+        if(d<minD){
+          minD = d;
+          this.closeT = game.towers[i];
         }
       }
     }
