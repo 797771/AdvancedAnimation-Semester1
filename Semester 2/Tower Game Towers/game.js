@@ -80,9 +80,7 @@ Game.prototype.run = function(){
         this.actors[i].run();
     }
     for(let i = 0; i < this.towers.length; i++){
-      if(this.towers[i].numCaught<4){
         this.towers[i].run();    // run each tower
-      }
    }
 
 }
