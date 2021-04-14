@@ -25,7 +25,8 @@ Tower.prototype.run = function(){
     for(let i=0; i<this.caught.length;i++){
       game.actors.splice(this.caught[i], 1);
     }
-    game.towers.splice(this.tNum, 1);
+    game.towers.splice(game.towers.indexOf(this));
+    game.numTowers--;
   }
   else{
     this.update();
